@@ -1,3 +1,8 @@
+<?php 
+$variableee = readfile("http://localhost/admin/api/1");
+echo $variableee;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -380,74 +385,73 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-             <h1 class="h3 mb-4 text-gray-800">Add New Stall</h1>
+             <h1 class="h3 mb-4 text-gray-800">Edit Stall</h1>
           <!-- Page Heading -->
-         <form method="post" class="form-horizontal" id="upload" enctype="multipart/form-data">
-					
+         <form method="post" class="form-horizontal" id="updateForms" enctype="multipart/form-data">
+				<input  type="hidden" id="id" name="id" class="form-control" />	
 				<div class="form-group">
 				<label class="col-sm-3 control-label">Name</label>
-				<div class="col-sm-8">
+				<div class="col-sm-6">
 				<input type="text" id="txt_name" name="txt_name" class="form-control" placeholder="enter name" />
 				</div>
 				</div>
-				<div class="form-row">	
-				<div class="form-group col-md-6">
-				<label class="col-lg-3 control-label">Description</label>
-				<div class="col-lg-6">
-				<input type="text" id="description" name="description" class="form-control" placeholder="enter Description" />
+					
+				<div class="form-group">
+				<label class="col-sm-3 control-label">Description</label>
+				<div class="col-sm-6">
+				<input type="text" id="description"name="description" class="form-control" placeholder="enter Description" />
 				</div>
 				</div>
-             <div class="form-group col-md-6">
-                 <label class="col-lg-3 control-label">Action</label>   
+                      <div class="form-group">
+                   <label class="col-sm-3 control-label">Start Date</label>
+				<div class="col-sm-6">  
+                <div class="datepicker date input-group">
+                    <input type="text" placeholder="Start-date" name="start" class="form-control" id="start">
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></div>
+                    </div>
+                </div>
+            </div>
+             
+             <div class="form-group">
+                   <label class="col-sm-3 control-label">End Date</label>
+				<div class="col-sm-6">  
+                <div class="datepicker date input-group">
+                    <input type="text" placeholder="End-date" name="end" class="form-control" id="end">
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></div>
+                    </div>
+                </div>
+            </div>
+                <div class="form-group">
+                 <label class="col-sm-3 control-label">Action</label>   
                 
-                  <div class="col-lg-6">  
+                  <div class="col-sm-6">   
                 <select name="action" id="action" required="required">
                             <option value="1">Active</option>
                             <option value="2">In-Active</option>
                         </select>
                 </div>   
-                 </div>  
-                  </div>  
-             <div class="form-row">
-                <div class="form-group col-md-6">
-                <label class="col-sm-3 control-label">Start Date</label>
-                   <div class="datepicker date input-group">
-                    <input type="text" placeholder="Start-date" name="start" class="form-control" id="startDate">
-                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></div>
-                    </div>
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="col-sm-3 control-label">End Date</label>
-                    <div class="datepicker date input-group">
-                    <input type="text" placeholder="End-date" name="end" class="form-control" id="endDate">
-                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></div>
-                    </div>
-                    </div>
-             </div>        
-              
-             
-                
+                 </div>   
 				<div class="form-group">
 				<label class="col-sm-3 control-label">File</label>
 				<div class="col-sm-6">
-				<input type="file" id="txt_file" name="txt_file" class="form-control" />
+				<input type="file" id="txt_file" name="txt_file" class="form-control" accept="image/*"/>
 				</div>
 				</div>
                 <div class="form-group">
 				<label class="col-sm-3 control-label">Floor</label>
 				<div class="col-sm-6">
-				<input type="file" id="txt_floor" name="txt_floor" class="form-control" />
+				<input type="file" id="txt_floor" name="txt_floor" class="form-control" accept="image/*"/>
 				</div>
 				</div>
 				<div class="form-group">
 				<div class="col-sm-offset-3 col-sm-9 m-t-15">
-				<input type="submit" href="edit.php" name="btn_insert" class="btn btn-success " value="Insert">
+                <input type="hidden" name="_METHOD" value="PUT"/>
+				<input type="submit"  name="btn_insert" class="btn btn-success" value="Insert">
 				<a href="index.php" class="btn btn-danger">Cancel</a>
 				</div>
 				</div>
 					
 			</form>
-
         </div>
         <!-- /.container-fluid -->
 

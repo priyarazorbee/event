@@ -1,5 +1,5 @@
 <?php
-error_reporting(0         );
+error_reporting(0);
 ini_set('display_errors', 1);
 require 'Slim/Slim.php';
 require 'config.php';
@@ -18,26 +18,28 @@ $app->get('/:id','getImage');
 $app->put('/:id', 'updateImage');
 $app->delete('/:id','deleteImage');
 
+
 $app->run();
+
 function updateImage($id) {
      $request = \Slim\Slim::getInstance()->request();
     $data = json_decode($request->getBody());
     $id = $_REQUEST['id'];
        
         try {
-            $name	= $_REQUEST['txt_name'];
+           $db = getDB();
+        $name	= $_REQUEST['txt_name'];
 	    $description	= $_REQUEST['description'];	
        $action	= $_REQUEST['action'];	
-             $start	= $_REQUEST['start'];	
-             $end	= $_REQUEST['end'];	
+       $start	= $_REQUEST['start'];
+       $end	= $_REQUEST['end'];
 		$image_file	= $_FILES["txt_file"]["name"];
 		$type		= $_FILES["txt_file"]["type"];		
 		$size		= $_FILES["txt_file"]["size"];
 		$temp		= $_FILES["txt_file"]["tmp_name"];
-		
+		$floor_file	= $_FILES["txt_floor"]["name"];
 		$path="api/upload/".$image_file; 
-            echo $id;
-            $db = getDB();
+       $paths="api/floor_upload/".$floor_file;
              $sql = "UPDATE images SET name=:name,description=:description,start=:start,end=:end,action=:action,image=:image WHERE id=:id";
             $stmt = $db->prepare($sql);
             $stmt->bindParam("name", $name);
@@ -46,9 +48,11 @@ function updateImage($id) {
              $stmt->bindParam("start", $start);
              $stmt->bindParam("end", $end);
              $stmt->bindParam("image", $path);
+            $stmt->bindParam("floor", $paths);
             $stmt->bindParam("id", $id);
             $stmt->execute();
              move_uploaded_file($_FILES['txt_file']['tmp_name'],"upload/".$_FILES['txt_file']['name']);
+            move_uploaded_file($_FILES['txt_floor']['tmp_name'],"upload/".$_FILES['txt_floor']['name']);
             $db = null;
             echo '{"success":{"text":"saved"}}';
 
@@ -138,6 +142,7 @@ function viewGet() {
 function image() {
     $request = \Slim\Slim::getInstance()->request();
     $data = json_decode($request->getBody());
+    
    try {
         $db = getDB();
         $name	= $_REQUEST['txt_name'];
@@ -149,8 +154,10 @@ function image() {
 		$type		= $_FILES["txt_file"]["type"];		
 		$size		= $_FILES["txt_file"]["size"];
 		$temp		= $_FILES["txt_file"]["tmp_name"];
-		
+		$floor_file	= $_FILES["txt_floor"]["name"];
 		$path="api/upload/".$image_file; 
+       $paths="api/floor_upload/".$floor_file;
+       
        echo $path;
 		if(empty($name)){
 			$errorMsg="Please Enter Name";
@@ -184,14 +191,16 @@ function image() {
 		if(!isset($errorMsg))
 		{
             
-			$insert_stmt=$db->prepare('INSERT INTO images(name,description,action,start, end ,image) VALUES(:name,:description,:action,:start, :end,:image)'); //sql insert query					
+			$insert_stmt=$db->prepare('INSERT INTO images(name,description,action,start, end ,image,floor) VALUES(:name,:description,:action,:start, :end,:image,:floor)'); //sql insert query					
 			$insert_stmt->bindParam(':name',$name);	
             $insert_stmt->bindParam(':description',$description);
             $insert_stmt->bindParam(':action',$action);
              $insert_stmt->bindParam(':start',$start);
              $insert_stmt->bindParam(':end',$end);
 			$insert_stmt->bindParam(':image',$path);	  //bind all parameter 
+            $insert_stmt->bindParam(':floor',$paths);
 		    move_uploaded_file($_FILES['txt_file']['tmp_name'],"upload/".$_FILES['txt_file']['name']);
+            move_uploaded_file($_FILES['txt_floor']['tmp_name'],"floor_upload/".$_FILES['txt_floor']['name']);
 			if($insert_stmt->execute())
 			{
 				$insertMsg="File Upload Successfully........"; //execute query success message
@@ -204,7 +213,11 @@ function image() {
 		echo $e->getMessage();
 	}
 }
+$app->get('/new', function ($request, $response) {
+    $url = $app->urlFor('edit', array('id' => '1')); 
+    echo $url;
 
+});
 function getImages() {
         $request = \Slim\Slim::getInstance()->request();
         $data = json_decode($request->getBody()); 
