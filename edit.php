@@ -1,6 +1,11 @@
-<?php 
-$variableee = readfile("http://localhost/admin/api/1");
-echo $variableee;
+<?php
+ini_set("max_execution_time", 0);
+
+$variableee = json_decode(file_get_contents("http://localhost/event/api/1"));
+//echo "<pre>";
+//print_r($variableee);
+//echo "</pre>";
+
 
 ?>
 <!DOCTYPE html>
@@ -387,19 +392,19 @@ echo $variableee;
         <div class="container-fluid">
              <h1 class="h3 mb-4 text-gray-800">Edit Stall</h1>
           <!-- Page Heading -->
-         <form method="post" class="form-horizontal" id="updateForms" enctype="multipart/form-data">
+   <form method="post" class="form-horizontal" id="updateForm" enctype="multipart/form-data">
 				<input  type="hidden" id="id" name="id" class="form-control" />	
 				<div class="form-group">
 				<label class="col-sm-3 control-label">Name</label>
 				<div class="col-sm-6">
-				<input type="text" id="txt_name" name="txt_name" class="form-control" placeholder="enter name" />
+				<input type="text" id="txt_name" name="txt_name" class="form-control" placeholder="<?php echo $variableee->name ?>" />
 				</div>
 				</div>
 					
 				<div class="form-group">
 				<label class="col-sm-3 control-label">Description</label>
 				<div class="col-sm-6">
-				<input type="text" id="description"name="description" class="form-control" placeholder="enter Description" />
+				<input type="text" id="description"name="description" class="form-control" placeholder="<?php echo $variableee->description ?>" />
 				</div>
 				</div>
                       <div class="form-group">

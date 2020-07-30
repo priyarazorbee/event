@@ -28,7 +28,7 @@ $(document).ready(function() {
 		}
 	});
 	});
-    $("#viewForm").submit(function(e){
+ //   $("#viewForm").submit(function(e){
 //		e.preventDefault();
 //        console.log('addUser');
 //    $.ajax({
@@ -46,7 +46,7 @@ $(document).ready(function() {
 //			alert('addUser error: ' + textStatus);
 //		}
 //	});
-	});
+//	});
    $("#loginForm").submit(function(e){
 		e.preventDefault();
         console.log('seeUser'); 
@@ -148,11 +148,11 @@ function findById(id) {
 	});
 }
 $("#deleteForm").submit(function(e){
-	
+	debugger;
 	console.log('deleteImage');
 	$.ajax({
 		type: 'DELETE',
-		url: rootURL + $('#id').val(),
+		url: rootURL +'delete'+'/' +  $('#id').val(),
 		success: function(data){
 			alert('Image deleted successfully');
 		},
@@ -166,9 +166,13 @@ function renderList(data) {
 	var list = data == null ? [] : (data.image instanceof Array ? data.image : [data.image]);
 
 //	$('#imageList li').remove();
-	$.each(list, function(index, data) {
-		$('#imageList').append('<tr href="#" data-identity="' + data.id + '"><td style="width:400px!important;"><img class="img-thumbnail" style="width:100%;" src='+data.image+'></td><td class="center" id="names"><span><b>Name: </b> '+data.name+'</span><br/><span class="center"><b>Description:</b>'+data.description+'</span><br/><span class="center"><b>Action:</b>'+data.action+'</span><br/><span class="center"><b>Start Date</b>:'+data.start+'</span><br/><span class="center"><b>End date:</b>'+data.end+'</span></td><td><button class="btn btn-primary btn-icon-split btn-lg" data-toggle="modal" data-target="#myModal" onClick="findById('+data.id+');">&nbsp;&nbsp;Edit&nbsp;&nbsp;</button><br/><button class="btn btn-primary btn-icon-split btn-lg"><a style="color:#ffffff;" href="action.html">Action</a></button><br/><button class="btn btn-danger btn-icon-split btn-lg" data-toggle="modal" data-target="#myModal2">Delete</button></td></tr>');
-	});
+
+    	$.each(list, function(index, data) {
+		$('#imageList').append(' <div class="card mb-3" style="max-width: 1140px;"><div class="row no-gutters" href="#" data-identity="' + data.id + '"><div class="col-md-4"><img  src='+data.image+' class="card-img" data-toggle="modal" data-target="#myModal" onClick="findById('+data.id+');"></div><div class="col-md-6"><div class="card-body"><h5 class="card-title"> '+data.name+'</h5><p class="card-text">'+data.description+'</p><p class="card-text"><small class="text-muted">'+data.start+' to </small><small class="text-muted">'+data.end+'</small></p></div></div><div id ="buttons" class="col-md-2"><button class="btn btn-primary"><a href="edit.php?id='+data.id+'">&nbsp;&nbsp;Edit&nbsp;&nbsp;</a></button><br/><button class="btn btn-primary "><a style="color:#ffffff;" href="action.html">Action</a></button><br/><button class="btn btn-danger" data-toggle="modal" data-target="#myModal2" >Delete</button></div></div></div>');
+    
+	}); 
+//    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" onClick="findById('+data.id+');">&nbsp;&nbsp;Edit&nbsp;&nbsp;</button>
+    
 }
 $('#imageList tr').on('click', function() {
 	findById($(this).data('identity'));
@@ -179,7 +183,7 @@ $("#updateForm").submit(function(e){
 debugger;
     console.log('update');
   $.ajax({
-    url: rootURL +  $('#id').val(),
+    url: rootURL +'update'+'/'+  $('#id').val(),
     type: "POST",
     data: formData,
     success: function (msg) {

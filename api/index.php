@@ -15,8 +15,8 @@ $app->get('/', 'getImages');
 $app->get('/action', 'getIdImages');
 $app->get('/inaction', 'getViewImages');
 $app->get('/:id','getImage');
-$app->put('/:id', 'updateImage');
-$app->delete('/:id','deleteImage');
+$app->put('/update/:id', 'updateImage');
+$app->delete('/delete/:id','deleteImage');
 
 
 $app->run();
@@ -40,7 +40,7 @@ function updateImage($id) {
 		$floor_file	= $_FILES["txt_floor"]["name"];
 		$path="api/upload/".$image_file; 
        $paths="api/floor_upload/".$floor_file;
-             $sql = "UPDATE images SET name=:name,description=:description,start=:start,end=:end,action=:action,image=:image WHERE id=:id";
+             $sql = "UPDATE images SET name=:name,description=:description,start=:start,end=:end,action=:action,image=:image,floor=:floor WHERE id=:id";
             $stmt = $db->prepare($sql);
             $stmt->bindParam("name", $name);
              $stmt->bindParam("description", $description);

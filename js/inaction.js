@@ -35,8 +35,7 @@ function renderList(data) {
 console.log(list);
 //	$('#imageList li').remove();
 	$.each(list, function(index, data) {
-		$('#imageList').append('<tr href="#" data-identity="' + data.id + '"><td style="width:400px!important;"><img class="img-thumbnail" style="width:100%;" src='+data.image+'></td><td class="center" id="names"><span><b>Name: </b> '+data.name+'</span><br/><span class="center"><b>Description:</b>'+data.description+'</span><br/><span class="center"><b>Action:</b>'+data.action+'</span><br/><span class="center"><b>Start Date</b>:'+data.start+'</span><br/><span class="center"><b>End date:</b>'+data.end+'</span></td></tr>');
-	
+		$('#imageList').append(' <div class="card mb-3" style="max-width: 1140px;"><div class="row no-gutters" href="#" data-identity="' + data.id + '"><div class="col-md-4"><img  src='+data.image+' class="card-img" alt=""></div><div class="col-md-8"><div class="card-body"><h5 class="card-title"> '+data.name+'</h5><p class="card-text">'+data.description+'</p><p class="card-text"><small class="text-muted">'+data.start+' to </small><small class="text-muted">'+data.end+'</small></p></div></div></div>');
 	});
 }
 $('#imageList tr').on('click', function() {
