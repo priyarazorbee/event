@@ -1,7 +1,11 @@
 <?php
 ini_set("max_execution_time", 0);
-
-$variableee = json_decode(file_get_contents("http://localhost/event/api/1"));
+$search = $_SERVER['REQUEST_URI'] ;
+$url_components = parse_url($search); 
+   parse_str($url_components['query'], $params); 
+     $id= $params['id'];
+  $url="http://localhost/event/api/".$id;
+$variableee = json_decode(file_get_contents($url));
 //echo "<pre>";
 //print_r($variableee);
 //echo "</pre>";
@@ -393,7 +397,7 @@ $variableee = json_decode(file_get_contents("http://localhost/event/api/1"));
              <h1 class="h3 mb-4 text-gray-800">Edit Stall</h1>
           <!-- Page Heading -->
    <form method="post" class="form-horizontal" id="updateForm" enctype="multipart/form-data">
-				<input  type="hidden" id="id" name="id" class="form-control" />	
+				<input  type="hidden" id="<?php echo $variableee->id ?>" name="<?php echo $variableee->id ?>" class="form-control" />	
 				<div class="form-group">
 				<label class="col-sm-3 control-label">Name</label>
 				<div class="col-sm-6">
@@ -407,25 +411,22 @@ $variableee = json_decode(file_get_contents("http://localhost/event/api/1"));
 				<input type="text" id="description"name="description" class="form-control" placeholder="<?php echo $variableee->description ?>" />
 				</div>
 				</div>
-                      <div class="form-group">
-                   <label class="col-sm-3 control-label">Start Date</label>
-				<div class="col-sm-6">  
-                <div class="datepicker date input-group">
-                    <input type="text" placeholder="Start-date" name="start" class="form-control" id="start">
+                   <div class="form-row">
+                <div class="form-group col-md-6">
+                <label class="col-sm-3 control-label">Start Date</label>
+                   <div class="datepicker date input-group">
+                    <input type="text" placeholder="Start-date" name="start" class="form-control" id="startDate">
                     <div class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></div>
                     </div>
                 </div>
-            </div>
-             
-             <div class="form-group">
-                   <label class="col-sm-3 control-label">End Date</label>
-				<div class="col-sm-6">  
-                <div class="datepicker date input-group">
-                    <input type="text" placeholder="End-date" name="end" class="form-control" id="end">
+                <div class="form-group col-md-6">
+                    <label class="col-sm-3 control-label">End Date</label>
+                    <div class="datepicker date input-group">
+                    <input type="text" placeholder="End-date" name="end" class="form-control" id="endDate">
                     <div class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></div>
                     </div>
-                </div>
-            </div>
+                    </div>
+             </div>
                 <div class="form-group">
                  <label class="col-sm-3 control-label">Action</label>   
                 
@@ -439,15 +440,24 @@ $variableee = json_decode(file_get_contents("http://localhost/event/api/1"));
 				<div class="form-group">
 				<label class="col-sm-3 control-label">File</label>
 				<div class="col-sm-6">
-				<input type="file" id="txt_file" name="txt_file" class="form-control" accept="image/*"/>
+                    <div class="row">
+                      <div class="col-sm-6">  
+                     <img class="img-thumbnail" src="http://localhost/admin/<?php echo $variableee->image ?>"/> </div>
+                         <div class="col-sm-6"> 
+				<input type="file" id="txt_file" name="txt_file" class="form-control" accept="image/*"/></div>
 				</div>
-				</div>
+				</div></div>
+       
                 <div class="form-group">
 				<label class="col-sm-3 control-label">Floor</label>
 				<div class="col-sm-6">
-				<input type="file" id="txt_floor" name="txt_floor" class="form-control" accept="image/*"/>
+				  <div class="row">
+                      <div class="col-sm-6">  
+                     <img class="img-thumbnail" src="http://localhost/admin/<?php echo $variableee->floor ?>"/> </div>
+                         <div class="col-sm-6"> 
+				<input type="file" id="txt_floor" name="txt_floor" class="form-control" accept="image/*"/></div>
 				</div>
-				</div>
+				</div></div>
 				<div class="form-group">
 				<div class="col-sm-offset-3 col-sm-9 m-t-15">
                 <input type="hidden" name="_METHOD" value="PUT"/>
