@@ -1,58 +1,62 @@
-<?php
-ini_set("max_execution_time", 0);
-$search = $_SERVER['REQUEST_URI'] ;
-$url_components = parse_url($search); 
-   parse_str($url_components['query'], $params); 
-     $id= $params['id'];
-  $url="http://localhost/event/api/getId/".$id;
-$variableee = json_decode(file_get_contents($url));
-//echo "<pre>";
-//print_r($variableee);
-//echo "</pre>";
-
-include "head.php"; 
+<?php include "head.php"; 
 include "sidebar.php";
 include "navbar.php";
 ?>
-    <!-- End of Sidebar -->
+
 
         <!-- End of Topbar -->
-
+ 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-             <h1 class="h3 mb-4 text-gray-800">Edit Stall</h1>
-          <!-- Page Heading -->
-   <form method="post" class="form-horizontal" id="updateForm" enctype="multipart/form-data">
-				<input  type="hidden" id="<?php echo $variableee->id ?>" name="<?php echo $variableee->id ?>" class="form-control" />	
+            <h1 class="h3 mb-4 text-gray-800">All Stall</h1>
+            <div id="imageList">
+       </div>      
+            
+
+      <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+           <h4 style="text-align: left;" class="modal-title">Update file</h4> 
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+        </div>
+        <form method="post" class="form-horizontal" id="updateForm" enctype="multipart/form-data">
+				<input  type="hidden" id="id" name="id" class="form-control" />	
 				<div class="form-group">
 				<label class="col-sm-3 control-label">Name</label>
 				<div class="col-sm-6">
-				<input type="text" id="txt_name" name="txt_name" class="form-control" placeholder="<?php echo $variableee->name ?>" />
+				<input type="text" id="txt_name" name="txt_name" class="form-control" placeholder="enter name" />
 				</div>
 				</div>
 					
 				<div class="form-group">
 				<label class="col-sm-3 control-label">Description</label>
 				<div class="col-sm-6">
-				<input type="text" id="description"name="description" class="form-control" placeholder="<?php echo $variableee->description ?>" />
+				<input type="text" id="description"name="description" class="form-control" placeholder="enter Description" />
 				</div>
 				</div>
-                   <div class="form-row">
-                <div class="form-group col-md-6">
-                <label class="col-sm-3 control-label">Start Date</label>
-                   <div class="datepicker date input-group">
-                    <input type="text" placeholder="Start-date" name="start" class="form-control" id="startDate">
+                      <div class="form-group">
+                   <label class="col-sm-3 control-label">Start Date</label>
+				<div class="col-sm-6">  
+                <div class="datepicker date input-group">
+                    <input type="text" placeholder="Start-date" name="start" class="form-control" id="start">
                     <div class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></div>
                     </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label class="col-sm-3 control-label">End Date</label>
-                    <div class="datepicker date input-group">
-                    <input type="text" placeholder="End-date" name="end" class="form-control" id="endDate">
+            </div>
+             
+             <div class="form-group">
+                   <label class="col-sm-3 control-label">End Date</label>
+				<div class="col-sm-6">  
+                <div class="datepicker date input-group">
+                    <input type="text" placeholder="End-date" name="end" class="form-control" id="end">
                     <div class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></div>
                     </div>
-                    </div>
-             </div>
+                </div>
+            </div>
                 <div class="form-group">
                  <label class="col-sm-3 control-label">Action</label>   
                 
@@ -66,24 +70,15 @@ include "navbar.php";
 				<div class="form-group">
 				<label class="col-sm-3 control-label">File</label>
 				<div class="col-sm-6">
-                    <div class="row">
-                      <div class="col-sm-6">  
-                     <img class="img-thumbnail" src="http://localhost/admin/<?php echo $variableee->image ?>"/> </div>
-                         <div class="col-sm-6"> 
-				<input type="file" id="txt_file" name="txt_file" class="form-control" accept="image/*"/></div>
+				<input type="file" id="txt_file" name="txt_file" class="form-control" accept="image/*"/>
 				</div>
-				</div></div>
-       
+				</div>
                 <div class="form-group">
 				<label class="col-sm-3 control-label">Floor</label>
 				<div class="col-sm-6">
-				  <div class="row">
-                      <div class="col-sm-6">  
-                     <img class="img-thumbnail" src="http://localhost/admin/<?php echo $variableee->floor ?>"/> </div>
-                         <div class="col-sm-6"> 
-				<input type="file" id="txt_floor" name="txt_floor" class="form-control" accept="image/*"/></div>
+				<input type="file" id="txt_floor" name="txt_floor" class="form-control" accept="image/*"/>
 				</div>
-				</div></div>
+				</div>
 				<div class="form-group">
 				<div class="col-sm-offset-3 col-sm-9 m-t-15">
                 <input type="hidden" name="_METHOD" value="PUT"/>
@@ -93,14 +88,50 @@ include "navbar.php";
 				</div>
 					
 			</form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
+      </div>
+    </div> 
+</div>
+            
+       <div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Delete file</h4>
+        </div>
+        <form method="delete" class="form-horizontal" id="deleteForm" enctype="multipart/form-data">
+					
+				<div class="form-group">
+				Do you want to delete??
+				</div>
+				<div class="form-group">
+			<input type="submit"  name="btn_insert" class="btn btn-success" value="Delete">
+				<a href="index.php" class="btn btn-danger">Cancel</a>
+				</div>
+				
+					
+			</form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div> 
+</div>     
+    </div>
+
+        
         <!-- /.container-fluid -->
 
       </div>
       <!-- End of Main Content -->
 
       <!-- Footer -->
-     <?php include "footer.php"; ?>
+      <?php include "footer.php"; ?>
       <!-- End of Footer -->
 
     </div>
@@ -134,7 +165,7 @@ include "navbar.php";
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->

@@ -1,1 +1,6 @@
-#buttons .btn{margin-top: 15px!important;}
+#buttons .btn{
+    margin-top: 15px!important;
+}
+.btn a{
+    color:#fff;
+}

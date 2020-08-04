@@ -14,7 +14,7 @@ $app->post('/image','image');
 $app->get('/', 'getImages');
 $app->get('/action', 'getIdImages');
 $app->get('/inaction', 'getViewImages');
-$app->get('/:id','getImage');
+$app->get('/getId/:id','getImage');
 $app->put('/update/:id', 'updateImage');
 $app->delete('/delete/:id','deleteImage');
 

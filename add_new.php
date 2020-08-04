@@ -1,43 +1,42 @@
 <?php
-ini_set("max_execution_time", 0);
-$search = $_SERVER['REQUEST_URI'] ;
-$url_components = parse_url($search); 
-   parse_str($url_components['query'], $params); 
-     $id= $params['id'];
-  $url="http://localhost/event/api/getId/".$id;
-$variableee = json_decode(file_get_contents($url));
-//echo "<pre>";
-//print_r($variableee);
-//echo "</pre>";
-
-include "head.php"; 
+include "head.php";
 include "sidebar.php";
 include "navbar.php";
 ?>
-    <!-- End of Sidebar -->
-
+   
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-             <h1 class="h3 mb-4 text-gray-800">Edit Stall</h1>
+             <h1 class="h3 mb-4 text-gray-800">Add New Stall</h1>
           <!-- Page Heading -->
-   <form method="post" class="form-horizontal" id="updateForm" enctype="multipart/form-data">
-				<input  type="hidden" id="<?php echo $variableee->id ?>" name="<?php echo $variableee->id ?>" class="form-control" />	
-				<div class="form-group">
-				<label class="col-sm-3 control-label">Name</label>
-				<div class="col-sm-6">
-				<input type="text" id="txt_name" name="txt_name" class="form-control" placeholder="<?php echo $variableee->name ?>" />
-				</div>
-				</div>
+         <form method="post" class="form-horizontal" id="upload" enctype="multipart/form-data">
 					
 				<div class="form-group">
-				<label class="col-sm-3 control-label">Description</label>
-				<div class="col-sm-6">
-				<input type="text" id="description"name="description" class="form-control" placeholder="<?php echo $variableee->description ?>" />
+				<label class="col-sm-3 control-label">Name</label>
+				<div class="col-sm-8">
+				<input type="text" id="txt_name" name="txt_name" class="form-control" placeholder="enter name" />
 				</div>
 				</div>
-                   <div class="form-row">
+				<div class="form-row">	
+				<div class="form-group col-md-6">
+				<label class="col-lg-3 control-label">Description</label>
+				<div class="col-lg-6">
+				<input type="text" id="description" name="description" class="form-control" placeholder="enter Description" />
+				</div>
+				</div>
+             <div class="form-group col-md-6">
+                 <label class="col-lg-3 control-label">Action</label>   
+                
+                  <div class="col-lg-6">  
+                <select name="action" id="action" required="required">
+                            <option value="1">Active</option>
+                            <option value="2">In-Active</option>
+                        </select>
+                </div>   
+                 </div>  
+                  </div>  
+             <div class="form-row">
                 <div class="form-group col-md-6">
                 <label class="col-sm-3 control-label">Start Date</label>
                    <div class="datepicker date input-group">
@@ -52,47 +51,31 @@ include "navbar.php";
                     <div class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></div>
                     </div>
                     </div>
-             </div>
-                <div class="form-group">
-                 <label class="col-sm-3 control-label">Action</label>   
+             </div>        
+              
+             
                 
-                  <div class="col-sm-6">   
-                <select name="action" id="action" required="required">
-                            <option value="1">Active</option>
-                            <option value="2">In-Active</option>
-                        </select>
-                </div>   
-                 </div>   
 				<div class="form-group">
 				<label class="col-sm-3 control-label">File</label>
 				<div class="col-sm-6">
-                    <div class="row">
-                      <div class="col-sm-6">  
-                     <img class="img-thumbnail" src="http://localhost/admin/<?php echo $variableee->image ?>"/> </div>
-                         <div class="col-sm-6"> 
-				<input type="file" id="txt_file" name="txt_file" class="form-control" accept="image/*"/></div>
+				<input type="file" id="txt_file" name="txt_file" class="form-control" />
 				</div>
-				</div></div>
-       
+				</div>
                 <div class="form-group">
 				<label class="col-sm-3 control-label">Floor</label>
 				<div class="col-sm-6">
-				  <div class="row">
-                      <div class="col-sm-6">  
-                     <img class="img-thumbnail" src="http://localhost/admin/<?php echo $variableee->floor ?>"/> </div>
-                         <div class="col-sm-6"> 
-				<input type="file" id="txt_floor" name="txt_floor" class="form-control" accept="image/*"/></div>
+				<input type="file" id="txt_floor" name="txt_floor" class="form-control" />
 				</div>
-				</div></div>
+				</div>
 				<div class="form-group">
 				<div class="col-sm-offset-3 col-sm-9 m-t-15">
-                <input type="hidden" name="_METHOD" value="PUT"/>
-				<input type="submit"  name="btn_insert" class="btn btn-success" value="Insert">
+				<input type="submit" href="edit.php" name="btn_insert" class="btn btn-success " value="Insert">
 				<a href="index.php" class="btn btn-danger">Cancel</a>
 				</div>
 				</div>
 					
 			</form>
+
         </div>
         <!-- /.container-fluid -->
 
@@ -100,7 +83,7 @@ include "navbar.php";
       <!-- End of Main Content -->
 
       <!-- Footer -->
-     <?php include "footer.php"; ?>
+  <?php include "footer.php"; ?>
       <!-- End of Footer -->
 
     </div>

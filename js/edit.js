@@ -18,7 +18,7 @@ function findById(id) {
 	console.log('findById: ' + id);
 	$.ajax({
 		type: 'GET',
-		url: rootURL + id,
+		url: rootURL +'getId'+'/' + id,
 		dataType: "json",
 		success: function(data){
 			
