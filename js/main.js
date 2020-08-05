@@ -168,7 +168,20 @@ function renderList(data) {
 //	$('#imageList li').remove();
 
     	$.each(list, function(index, data) {
-		$('#imageList').append(' <div class="card mb-3" style="max-width: 1140px;"><div class="row no-gutters" href="#" data-identity="' + data.id + '"><div class="col-md-4"><img  src='+data.image+' class="card-img" data-toggle="modal" data-target="#myModal" onClick="findById('+data.id+');"></div><div class="col-md-6"><div class="card-body"><h5 class="card-title"> '+data.name+'</h5><p class="card-text">'+data.description+'</p><p class="card-text"><small class="text-muted">'+data.start+' to </small><small class="text-muted">'+data.end+'</small></p></div></div><div id ="buttons" class="col-md-2"><button class="btn btn-primary"><a href="edit.php?id='+data.id+'">&nbsp;&nbsp;Edit&nbsp;&nbsp;</a></button><br/><button class="btn btn-primary "><a style="color:#ffffff;" href="action.php">Action</a></button><br/><button class="btn btn-danger" data-toggle="modal" data-target="#myModal2" >Delete</button></div></div></div>');
+		$('#imageList').append(' <div class="card mb-3" style="max-width: 1140px;"><div class="row no-gutters" href="#" data-identity="' + data.id + '"><div class="col-md-4">'+
+   ( data.image !="" ? 
+        '<img  src='+data.image+' class="card-img" id="img-base"> '
+   :
+        '<p id="base"> Image not available' +
+        '</p>' 
+    ) +'</div><div class="col-md-6"><div class="card-body"><h5 class="card-title"> '+data.name+'</h5><p class="card-text">'+data.description+'</p><p class="card-text"><small class="text-muted">'+data.start+' to </small><small class="text-muted">'+data.end+'</small></p>'+
+   ( data.action >1 ? 
+        '<p >In-active <br/> <span class="inactive">Stall is not available</span>' +
+        '</p>' 
+   :
+        '<p> Active <br/> <span class="active">Stall is available</span>' +
+        '</p>' 
+    ) +'</p></div></div><div id ="buttons" class="col-md-2"><button class="btn btn-primary" id="btn-edit"><a href="edit.php?id='+data.id+'">&nbsp;&nbsp;Edit&nbsp;&nbsp;</a></button><br/><button class="btn btn-danger" data-toggle="modal" data-target="#myModal2" >Delete</button></div></div></div>');
     
 	}); 
 //    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" onClick="findById('+data.id+');">&nbsp;&nbsp;Edit&nbsp;&nbsp;</button>

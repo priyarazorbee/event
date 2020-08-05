@@ -18,7 +18,7 @@
 <link href="css/bootstrap-datepicker.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
+<link href="css/index.css" rel="stylesheet">
 </head>
 <style>
 .datepicker td, .datepicker th {

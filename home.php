@@ -101,18 +101,26 @@ include "navbar.php";
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
+            <h4 style="text-align: left;" class="modal-title">Delete file</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Delete file</h4>
+          
         </div>
         <form method="delete" class="form-horizontal" id="deleteForm" enctype="multipart/form-data">
 					
 				<div class="form-group">
+                    <div class="col-sm-6">
 				Do you want to delete??
 				</div>
-				<div class="form-group">
+            </div>
+					<div class="form-group">
+				<div class="col-sm-offset-3 col-sm-9 m-t-15">
+              		
 			<input type="submit"  name="btn_insert" class="btn btn-success" value="Delete">
 				<a href="index.php" class="btn btn-danger">Cancel</a>
 				</div>
+				</div>
+			
+				
 				
 					
 			</form>

@@ -35,7 +35,13 @@ function renderList(data) {
 console.log(list);
 //	$('#imageList li').remove();
 	$.each(list, function(index, data) {
-		$('#imageList').append(' <div class="card mb-3" style="max-width: 1140px;"><div class="row no-gutters" href="#" data-identity="' + data.id + '"><div class="col-md-4"><img  src='+data.image+' class="card-img" data-toggle="modal" data-target="#myModal" onClick="findById('+data.id+');"></div><div class="col-md-8"><div class="card-body"><h5 class="card-title"> '+data.name+'</h5><p class="card-text">'+data.description+'</p><p class="card-text"><small class="text-muted">'+data.start+' to </small><small class="text-muted">'+data.end+'</small></p></div></div></div>');
+		$('#imageList').append(' <div class="card mb-3" style="max-width: 1140px;"><div class="row no-gutters" href="#" data-identity="' + data.id + '"><div class="col-md-4">'+
+   ( data.image !="" ? 
+        '<img  src='+data.image+' class="card-img" id="img-base" data-toggle="modal" data-target="#myModal" onClick="findById('+data.id+');"> '
+   :
+        '<p id="base"> Image not available' +
+        '</p>' 
+    ) +'</div><div class="col-md-8"><div class="card-body"><h5 class="card-title"> '+data.name+'</h5><p class="card-text">'+data.description+'</p><p class="card-text"><small class="text-muted">'+data.start+' to </small><small class="text-muted">'+data.end+'</small></p><p class="card-text"><span class="active">Stall is available</span></p></div></div></div>');
 	});
 }
 $('#imageList tr').on('click', function() {

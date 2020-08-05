@@ -1,6 +1,22 @@
-#buttons .btn{
-    margin-top: 15px!important;
-}
+
 .btn a{
     color:#fff;
+}
+#img-base{
+    height: 220px!important;
+}
+#base{
+    height: 220px!important;
+    padding-top: 100px;
+    margin-left:50px;
+}
+#btn-edit{
+    margin: 40px 0 30px 0!important;
+}
+.active{
+    color: forestgreen;
+}
+
+.inactive{
+    color: red;
 }

@@ -110,7 +110,7 @@
       </li>
           <li class="nav-item">
         <a class="nav-link" href="action.php">
-          <i class="fas fa-fw fa-chart-area"></i>
+          <i class="fas fa-fw fa-folder"></i>
           <span>Active Stall</span></a>
       </li> 
       <!-- Nav Item - Tables -->
@@ -125,7 +125,7 @@
 
        <li class="nav-item">
         <a class="nav-link" href="add_new.php">
-          <i class="fas fa-fw fa-table"></i>
+          <i class="fas fa-fw fa-image"></i>
           <span>Add New Stall</span></a>
       </li>
 
@@ -135,7 +135,7 @@
         
         <li class="nav-item">
         <a class="nav-link" href="">
-          <i class="fas fa-fw fa-table"></i>
+          <i class="fas fa-fw fa-user"></i>
           <span>Profile</span></a>
       </li>
 
@@ -144,7 +144,7 @@
         
          <li class="nav-item">
         <a class="nav-link" href="">
-          <i class="fas fa-fw fa-table"></i>
+          <i class="fas fa-sign-out-alt"></i>
           <span>Logout</span></a>
       </li>
 

@@ -41,14 +41,14 @@ include "navbar.php";
                 <label class="col-sm-3 control-label">Start Date</label>
                    <div class="datepicker date input-group">
                     <input type="text" placeholder="Start-date" name="start" class="form-control" id="startDate">
-                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></div>
+                    <div class="input-group-append"><span class="input-group-text"><i class="fas fa-clock"></i></span></div>
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-sm-3 control-label">End Date</label>
                     <div class="datepicker date input-group">
                     <input type="text" placeholder="End-date" name="end" class="form-control" id="endDate">
-                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></div>
+                    <div class="input-group-append"><span class="input-group-text"><i class="fas fa-clock"></i></span></div>
                     </div>
                     </div>
              </div>        
