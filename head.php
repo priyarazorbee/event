@@ -20,6 +20,18 @@
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
 <link href="css/index.css" rel="stylesheet">
 </head>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="js/script.js"></script>
+   <script>
+    var url = "js/script.js";
+    
+    $.getScript(url, function(){
+        $(document).ready(function(){
+            console.log(rootURL); // Prints: Hi there!
+            
+        });
+    });
+    </script> 
 <style>
 .datepicker td, .datepicker th {
     width: 2.5rem;

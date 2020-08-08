@@ -1,4 +1,5 @@
-var rootURL = "http://localhost/event/api/";
+
+
 
 var currentImage;
 

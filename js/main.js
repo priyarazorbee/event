@@ -1,5 +1,3 @@
-var rootURL = "http://localhost/event/api/";
-
 var currentImage;
 
 
@@ -9,9 +7,10 @@ var currentImage;
 
 
 $(document).ready(function() { 
-	$("#signForm").submit(function(e){
+	$("#btnSave").click(function(e){
 		e.preventDefault();
         console.log('addUser');
+        debugger;
     $.ajax({
 		type: 'POST',
 		contentType: 'application/json',
@@ -21,7 +20,7 @@ $(document).ready(function() {
 		success: function(data, textStatus, jqXHR){
 			alert('User created successfully');
 		      debugger;
-			$('#username').val(data.username);
+			$('#firstName').val(data.username);
 		},
 		error: function(jqXHR, textStatus, errorThrown){
 			alert('addUser error: ' + textStatus);
@@ -79,7 +78,7 @@ function addUser() {
 		dataType: "json",
 		data: JSON.stringify({
 		
-		"username": $('#username').val(), 
+		"firstname": $('#firstName').val(), 
 		"email": $('#email').val(),
 		"password": $('#password').val(),
 		}),
@@ -225,10 +224,11 @@ function renderDetails(image) {
 function formToJSON() {
 	return JSON.stringify({
 		
-		"username": $('#username').val(), 
+		"fname": $('#firstName').val(),
+        "lname": $('#lastName').val(),
 		"email": $('#email').val(),
 		"password": $('#password').val(),
-		"confirm_password": $('#confirm_password').val(),
+		
 		
 		});
 }
