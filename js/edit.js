@@ -36,7 +36,7 @@ console.log(list);
 	$.each(list, function(index, data) {
 		$('#imageList').append(' <div class="card mb-3" style="max-width: 1140px;"><div class="row no-gutters" href="#" data-identity="' + data.id + '"><div class="col-md-4">'+
    ( data.image !="" ? 
-        '<img  src='+data.image+' class="card-img" id="img-base" data-toggle="modal" data-target="#myModal" onClick="findById('+data.id+');"> '
+        '<img  src='+data.image+' class="card-img" id="img-base" onClick="findById('+data.id+');"> '
    :
         '<p id="base"> Image not available' +
         '</p>' 
@@ -47,23 +47,7 @@ $('#imageList tr').on('click', function() {
 	findById($(this).data('identity'));
 });
 
-  $("#viewForm").submit(function(e){
-		var formData = new FormData($(this)[0]);
 
-  $.ajax({
-    url: rootURL +'view',
-    type: "POST",
-    data: formData,
-    success: function (msg) {
-      alert(msg)
-    },
-    cache: false,
-    contentType: false, 
-    processData: false
-  });
-
-  e.preventDefault();
-});
 function renderDetails(image) {
 	$('#id').val(image.id);
 	$('#txt_name').val(image.name);

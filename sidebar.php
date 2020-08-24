@@ -104,18 +104,18 @@
 
       <!-- Nav Item - Charts -->
       <li class="nav-item">
-        <a class="nav-link" href="home.php">
+        <a class="nav-link" href="all_stall.php">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>All Stall</span></a>
       </li>
           <li class="nav-item">
-        <a class="nav-link" href="action.php">
+        <a class="nav-link" href="active.php">
           <i class="fas fa-fw fa-folder"></i>
           <span>Active Stall</span></a>
       </li> 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="inaction.php">
+        <a class="nav-link" href="inactive.php">
           <i class="fas fa-fw fa-table"></i>
           <span>Inactive stall</span></a>
       </li>

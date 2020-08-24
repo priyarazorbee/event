@@ -20,7 +20,7 @@ $(document).ready(function() {
 		success: function(data, textStatus, jqXHR){
 			alert('User created successfully');
 		      debugger;
-			$('#firstName').val(data.username);
+			$('#userName').val(data.username);
 		},
 		error: function(jqXHR, textStatus, errorThrown){
 			alert('addUser error: ' + textStatus);
@@ -49,10 +49,11 @@ $(document).ready(function() {
    $("#loginForm").submit(function(e){
 		e.preventDefault();
         console.log('seeUser'); 
+       debugger;
    $.ajax({
 		type: 'POST',
 		contentType: 'application/json',
-		url: rootURL +'login',
+		url: rootURL +'logins',
 		dataType: "json",
 		data: formToJSON(),
 		success: function(data, textStatus, jqXHR){
@@ -224,7 +225,7 @@ function renderDetails(image) {
 function formToJSON() {
 	return JSON.stringify({
 		
-		"fname": $('#firstName').val(),
+		"username": $('#userName').val(),
         "lname": $('#lastName').val(),
 		"email": $('#email').val(),
 		"password": $('#password').val(),

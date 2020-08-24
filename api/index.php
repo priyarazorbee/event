@@ -7,8 +7,7 @@ require 'helper.php';
 \Slim\Slim::registerAutoloader();
 $app = new \Slim\Slim();
 
-$app->post('/login','login');
-$app->post('/file', 'fileGet');
+
 $app->post('/view', 'viewGet');
 $app->post('/image','image'); 
 $app->get('/', 'getImages');
@@ -62,91 +61,8 @@ function updateImage($id) {
     
 }
 
-/************************* USER LOGIN *************************************/
-/* ### User login ### */
-function login() {
-    
-    $request = \Slim\Slim::getInstance()->request();
-    $data = json_decode($request->getBody());
-    
-    try {
-        
-        $db = getDB();
-        $userData ='';
-        $sql = "SELECT user_id, fname, email, lname FROM users WHERE email=:email and password=:password ";
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam("email", $data->email, PDO::PARAM_STR);
-        $password=hash('sha256',$data->password);
-        $stmt->bindParam("password", $password, PDO::PARAM_STR);
-        $stmt->execute();
-        $mainCount=$stmt->rowCount();
-        $userData = $stmt->fetch(PDO::FETCH_OBJ);
-        
-        if(!empty($userData))
-        {
-            $user_id=$userData->user_id;
-            $userData->token = apiToken($user_id);
-        }
-        
-        $db = null;
-         if($userData){
-               $userData = json_encode($userData);
-                echo '{"userData": ' .$userData . '}';
-             header("refresh:3;home.php");
-            } else {
-               echo '{"error":{"text":"Bad request wrong username and password"}}';
-            }           
-    }
-    catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
-}
-function fileGet() {
- $request = \Slim\Slim::getInstance()->request();
-    $data = json_decode($request->getBody());
-    $fname=$data->fname;
-    $lname=$data->lname;
-    $email=$data->email;
-    $password=$data->password;
 
-    try {
-            $db = getDB();
-            $userData = '';
-            $sql = "SELECT user_id FROM users WHERE email=:email";
-            $stmt = $db->prepare($sql);
-            $stmt->bindParam("email", $email,PDO::PARAM_STR);
-            $stmt->execute();
-            $mainCount=$stmt->rowCount();
-            $created=time();
-            if($mainCount==0)
-            {
-                /*Inserting user values*/
-                $sql1="INSERT INTO users(fname,lname,email,password)VALUES(:fname,:lname,:email,:password)";
-                $stmt1 = $db->prepare($sql1);
-                $stmt1->bindParam("fname", $fname,PDO::PARAM_STR);
-                $stmt1->bindParam("lname", $name,PDO::PARAM_STR);
-                $stmt1->bindParam("email", $email,PDO::PARAM_STR);
-                $password=hash('sha256',$data->password);
-                $stmt1->bindParam("password", $password,PDO::PARAM_STR);
-                
-              
-                $stmt1->execute();
-                $userData=internalUserDetails($email);
-                $db = null;
-            if($userData){
-                   $userData = json_encode($userData);
-                    echo '{"userData": ' .$userData . '}';
-                } else {
-                   echo '{"error":{"text":"System error!"}}';
-                }
-            }else {
-                echo '{"error":{"text":"email or username already registered!"}}';
-            }
-   }
-    catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
-}
+
 
 function viewGet() {
  $request = \Slim\Slim::getInstance()->request();
@@ -251,11 +167,7 @@ function image() {
 		echo $e->getMessage();
 	}
 }
-$app->get('/new', function ($request, $response) {
-    $url = $app->urlFor('edit', array('id' => '1')); 
-    echo $url;
 
-});
 function getImages() {
         $request = \Slim\Slim::getInstance()->request();
         $data = json_decode($request->getBody()); 
@@ -335,24 +247,5 @@ function deleteImage($id) {
 }
 
 
-
-function internalUserDetails($input) {
-    
-    try {
-        $db = getDB();
-        $sql = "SELECT user_id, email, fname FROM users WHERE fname=:input or email=:input";
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam("input", $input,PDO::PARAM_STR);
-        $stmt->execute();
-        $usernameDetails = $stmt->fetch(PDO::FETCH_OBJ);
-        $usernameDetails->token = apiToken($usernameDetails->user_id);
-        $db = null;
-        return $usernameDetails;
-        
-    } catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
-    
-}
 
     ?>

@@ -17,6 +17,7 @@
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="js/script.js"></script>
    <script>
     var url = "js/script.js";
@@ -49,12 +50,12 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                   </div>
-                  <form class="user" id="loginForm">
+                  <form action="login_query.php" method="POST">
                     <div class="form-group">
-                      <input type="email" class="form-control form-control-user" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                      <input type="text" class="form-control form-control-user" name="username" id="userName" autocomplete="off" aria-describedby="emailHelp" placeholder="Enter Username...">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" name="password" id="password" placeholder="Password">
+                      <input type="password" class="form-control form-control-user" name="password" id="password" autocomplete="off" placeholder="Password">
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">
@@ -62,21 +63,25 @@
                         <label class="custom-control-label" for="customCheck">Remember Me</label>
                       </div>
                     </div>
-                    <input type="submit" class="btn btn-primary btn-user btn-block">
-                      Login
+                   <button class="btn btn-primary form-control" name="login">Login</button>
+                      
                     
                     <hr>
-                    <a href="index.html" class="btn btn-google btn-user btn-block">
+<!--
+                    <a href="index.php" class="btn btn-google btn-user btn-block">
                       <i class="fab fa-google fa-fw"></i> Login with Google
                     </a>
-                    <a href="index.html" class="btn btn-facebook btn-user btn-block">
+                    <a href="index.php" class="btn btn-facebook btn-user btn-block">
                       <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
                     </a>
+-->
                   </form>
-                  <hr>
+<!--
+                  
                   <div class="text-center">
                     <a class="small" href="forgot-password.html">Forgot Password?</a>
                   </div>
+-->
                   <div class="text-center">
                     <a class="small" href="register.html">Create an Account!</a>
                   </div>
@@ -91,7 +96,7 @@
     </div>
 
   </div>
-
+<script src="js/main.js"></script>
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

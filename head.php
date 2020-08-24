@@ -1,5 +1,13 @@
-
+ 
 <!DOCTYPE html>
+<?php
+	require 'api/config.php';
+	
+	
+	if(!ISSET($_SESSION['user'])){
+		header('location:index.php');
+	}
+?>
 <html lang="en">
 
 <head>
