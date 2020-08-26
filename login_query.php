@@ -6,11 +6,13 @@
 	if(ISSET($_POST['login'])){
 		if($_POST['username'] != "" || $_POST['password'] != ""){
             $db = getDB();
-			$username = $_POST['username'];
+			$username = $_REQUEST['username'];
 			$password = $_POST['password'];
-			$sql = "SELECT * FROM `users` WHERE `username`=? AND `password`=? ";
+			$sql = "SELECT * FROM `users` WHERE (username=:username or email=:username) AND password=:password ";
 			$query = $db->prepare($sql);
-			$query->execute(array($username,$password));
+			$query->bindValue(":username", $username, PDO::PARAM_STR);
+$query->bindValue(":password", $password, PDO::PARAM_STR);
+$query->execute();
 			$row = $query->rowCount();
 			$fetch = $query->fetch();
 			if($row > 0) {
@@ -29,4 +31,27 @@
 			";
 		}
 	}
+//try
+//{
+//     $db = getDB(); 
+//$username=$_POST['username'];
+//$password=$_POST['password'];
+//$secpss=password_hash($password,PASSWORD_DEFAULT);
+//$smt=$db->prepare("SELECT * FROM users WHERE username='$username'");
+//$smt->execute();
+//$result=$smt->fetch(PDO::FETCH_OBJ);
+//$prev=$result->password;
+//if(password_verify($password,$prev))
+//{
+//    echo 'inser';
+//}
+//else
+//{
+//    echo "not";
+//}
+//}
+//catch(ErrorException $e)
+//{
+//    $e->getMessage();
+//}
 ?>

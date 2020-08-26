@@ -52,7 +52,7 @@
                   </div>
                   <form action="login_query.php" method="POST">
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" name="username" id="userName" autocomplete="off" aria-describedby="emailHelp" placeholder="Enter Username...">
+                      <input type="text" class="form-control form-control-user" name="username" id="userName" autocomplete="off"  placeholder="Enter Username...">
                     </div>
                     <div class="form-group">
                       <input type="password" class="form-control form-control-user" name="password" id="password" autocomplete="off" placeholder="Password">

@@ -16,7 +16,7 @@ $app->get('/inaction', 'getViewImages');
 $app->get('/getId/:id','getImage');
 $app->put('/update/:id', 'updateImage');
 $app->delete('/delete/:id','deleteImage');
-
+$app->post('/logout', 'logout');
 
 $app->run();
 
@@ -63,35 +63,6 @@ function updateImage($id) {
 
 
 
-
-function viewGet() {
- $request = \Slim\Slim::getInstance()->request();
-    $data = json_decode($request->getBody());
-   try {
-        $db = getDB();
-       $event_id=$_REQUEST['event_id'];
-        $username	= $_REQUEST['username'];
-	    $details	= $_REQUEST['details'];	
-       $phone	= $_REQUEST['phone'];	
-		
-		            
-			$insert_stmt=$db->prepare('INSERT INTO guest(username,details,phone,event_id) VALUES(:username,:details,:phone,:event_id)'); $insert_stmt->bindParam(':event_id',$event_id);	
-			$insert_stmt->bindParam(':username',$username);	
-            $insert_stmt->bindParam(':details',$details);
-            $insert_stmt->bindParam(':phone',$phone);
-			
-			if($insert_stmt->execute())
-			{
-				$insertMsg="File Upload Successfully........"; //execute query success message
-//				header("refresh:3;home.php"); //refresh 3 second and redirect to index.php page
-			}
-		}
-	
-	catch(PDOException $e)
-	{
-		echo $e->getMessage();
-	}
-}
 
 function image() {
     $request = \Slim\Slim::getInstance()->request();
@@ -246,6 +217,16 @@ function deleteImage($id) {
 	}
 }
 
-
+function logout() {
+  
+	
+	try {
+		
+	session_destroy();
+	header('location: login.php');
+	} catch(PDOException $e) {
+		echo '{"error":{"text":'. $e->getMessage() .'}}'; 
+	}
+}
 
     ?>

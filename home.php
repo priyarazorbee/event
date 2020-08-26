@@ -4,7 +4,7 @@
 	
 	
 	if(!ISSET($_SESSION['user'])){
-		header('location:index.php');
+		header('location:home.php');
 	}
 ?>
 <html lang="en">

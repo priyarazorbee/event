@@ -9,7 +9,9 @@
 				$lastname = $_POST['lastname'];
 				$username = $_POST['username'];
                 $email = $_POST['email'];
-				$password = $_POST['password'];
+//				$enc_password = hash('sha256', $_POST['password']);
+//            $password= $enc_password;
+                $password = $_POST['password'];
 				$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				$sql = "INSERT INTO `users` VALUES ('', '$firstname', '$lastname', '$username','$email', '$password')";
 				$db->exec($sql);
@@ -18,7 +20,7 @@
 			}
 	
 			$db = null;
-			header('location:home.php');
+			header('location:login.php');
 		}else{
 			echo "
 				<script>alert('Please fill up the required field!')</script>

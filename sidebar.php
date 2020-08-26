@@ -143,9 +143,14 @@
       <hr class="sidebar-divider d-none d-md-block">
         
          <li class="nav-item">
-        <a class="nav-link" href="">
-          <i class="fas fa-sign-out-alt"></i>
-          <span>Logout</span></a>
+        
+          
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt"></i>
+                 <span>Logout</span>
+                </a> 
+             
+             
       </li>
 
         
