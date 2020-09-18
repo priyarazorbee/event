@@ -29,9 +29,9 @@
 <link href="css/index.css" rel="stylesheet">
 </head>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="js/script.js"></script>
+<script src="js/config.js"></script>
    <script>
-    var url = "js/script.js";
+    var url = "js/config.js";
     
     $.getScript(url, function(){
         $(document).ready(function(){
