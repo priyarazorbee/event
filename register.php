@@ -79,25 +79,13 @@
                   </div>
                 </div>
                 <input type="submit" class="btn btn-primary form-control" name="register">
-<!--                  <hr>-->
-<!--
-                <a href="home.php" class="btn btn-google btn-user btn-block">
-                  <i class="fab fa-google fa-fw"></i> Register with Google
-                </a>
-                <a href="home.php" class="btn btn-facebook btn-user btn-block">
-                  <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                </a>
--->
+
               </form>
                 
 
                 
               <hr>
-<!--
-              <div class="text-center">
-                <a class="small" href="forgot-password.php">Forgot Password?</a>
-              </div>
--->
+
               <div class="text-center">
                 <a class="small" href="login.php">Already have an account? Login!</a>
               </div>
@@ -112,7 +100,7 @@
   <!-- Bootstrap core JavaScript-->
    
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 

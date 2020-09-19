@@ -9,9 +9,8 @@ $app = new \Slim\Slim();
 
 $app->post('/login','login'); /* User login */
 $app->post('/register','register'); /* User Signup  */
-$app->post('/username','username');
-$app->post('/email','email');
-// $app->post('/view', 'viewGet');
+$app->post('/usernameValid','username');
+$app->post('/emailValid','email');
 $app->post('/image','image'); 
 $app->get('/', 'getImages');
 $app->get('/action', 'getIdImages');
@@ -37,10 +36,10 @@ function login(){
 			if($row > 0) {
                 
 				$_SESSION['user'] = $fetch['user_id'];
-			echo json_encode(array('status' => 'success','message'=> 'Logged in Successfully','color'=>'green'));
+			echo json_encode(array('status' => 'success','message'=> 'Logged in Successfully'));
                  
 			} else{
-               echo json_encode(array('status' => 'error','message'=> 'Please register','color'=>'red')); 
+               echo json_encode(array('status' => 'error','message'=> 'Please register')); 
 				
 			}
  
@@ -81,17 +80,17 @@ $lastInsertId = $db->lastInsertId();
 if($lastInsertId)
 {
 
-        echo json_encode(array('status' => 'success','message'=> 'Registered Successfully','color'=>'green'));
+        echo json_encode(array('status' => 'success','message'=> 'Registered Successfully'));
 }
 else 
 {
-    echo json_encode(array('status' => 'error','message'=> 'Something went wrong.Please try again','color'=>'red'));
+    echo json_encode(array('status' => 'error','message'=> 'Something went wrong.Please try again'));
 
                      }
 }
  else
 {
- echo json_encode(array('status' => 'error','message'=> 'Username or Email-id already exist. Please try again','color'=>'red'));   
+ echo json_encode(array('status' => 'error','message'=> 'Username or Email-id already exist. Please try again'));   
 }
 			         
     }
@@ -116,10 +115,10 @@ function username() {
             if($mainCount==0)
 {
    
-echo json_encode(array('status' => 'success','message'=> 'Username available for Registration.','color'=>'green'));
+echo json_encode(array('status' => 'success','message'=> 'Username available for Registration.'));
 } else{	
 
-                echo json_encode(array('status' => 'error','message'=> 'Username already exists.','color'=>'red'));
+                echo json_encode(array('status' => 'error','message'=> 'Username already exists.'));
 }
 }
 
@@ -134,11 +133,11 @@ $query-> execute();
 $results = $query -> fetchAll(PDO::FETCH_OBJ);
 if($query -> rowCount() > 0)
 {
-           echo json_encode(array('status' => 'error','message'=> 'Email-id already exists.','color'=>'green'));
+           echo json_encode(array('status' => 'error','message'=> 'Email-id already exists.'));
 
 } 
     else{
-        echo json_encode(array('status' => 'success','message'=> 'Email-id available for Registration..','color'=>'red'));
+        echo json_encode(array('status' => 'success','message'=> 'Email-id available for Registration..'));
 
 }
 }
