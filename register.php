@@ -62,7 +62,7 @@
                   </div>
                 </div>
                   <div class="form-group">
-                  <input type="text" class="form-control form-control-user" id= "username"  pattern="^[a-zA-Z][a-zA-Z0-9-_.]{5,12}$" name="username" placeholder="Username" required>
+                  <input type="text" class="form-control form-control-user" id= "username"  name="username" placeholder="Username" required>
                     <div id="username-availability"  style="font-size:12px;"></div>  
                   </div>
                 <div class="form-group">

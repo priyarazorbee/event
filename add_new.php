@@ -11,18 +11,21 @@ include "navbar.php";
              <h1 class="h3 mb-4 text-gray-800">Add New Stall</h1>
           <!-- Page Heading -->
          <form method="post" class="form-horizontal" id="upload" enctype="multipart/form-data">
-					
+         <div id ="result"></div>
+         <div id="loading">
+           <img id="loading-image" src="img/45.gif" alt="Loading..." />
+          </div>
 				<div class="form-group">
 				<label class="col-sm-3 control-label">Name</label>
 				<div class="col-sm-8">
-				<input type="text" id="txt_name" name="txt_name" class="form-control" placeholder="enter name" />
+				<input type="text" id="txt_name" name="txt_name" class="form-control" placeholder="enter name" required />
 				</div>
 				</div>
 				<div class="form-row">	
 				<div class="form-group col-md-6">
 				<label class="col-lg-3 control-label">Description</label>
 				<div class="col-lg-6">
-				<input type="text" id="description" name="description" class="form-control" placeholder="enter Description" />
+				<input type="text" id="description" name="description" class="form-control" placeholder="enter Description" required/>
 				</div>
 				</div>
              <div class="form-group col-md-6">
@@ -58,7 +61,7 @@ include "navbar.php";
 				<div class="form-group">
 				<label class="col-sm-3 control-label">File</label>
 				<div class="col-sm-6">
-				<input type="file" id="txt_file" name="txt_file" class="form-control" />
+				<input type="file" id="txt_file" name="txt_file" class="form-control" required/>
 				</div>
 				</div>
                 <div class="form-group">
@@ -98,7 +101,7 @@ include "navbar.php";
   </a>
 
   <!-- Logout Modal-->
-  <?php include "logout1.php";?>
+  <?php include "logout.php";?>
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
@@ -109,7 +112,7 @@ include "navbar.php";
 <script src="js/bootstrap-datepicker.min.js"></script>
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
-<script src="js/main.js"></script>
+  <script src="js/main.js"></script>
 <script>
 /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
 var dropdown = document.getElementsByClassName("dropdown-btn");

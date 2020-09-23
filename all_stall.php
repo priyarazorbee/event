@@ -74,7 +74,7 @@ include "navbar.php";
   </a>
 
   <!-- Logout Modal-->
-<?php include "logout1.php";?>
+<?php include "logout.php";?>
 
   <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

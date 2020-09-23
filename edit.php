@@ -23,6 +23,10 @@ include "navbar.php";
              <h1 class="h3 mb-4 text-gray-800">Edit Stall</h1>
           <!-- Page Heading -->
    <form method="post" class="form-horizontal" id="updateForm" enctype="multipart/form-data">
+        <div id ="result"></div>
+        <div id="loading">
+         <img id="loading-image" src="img/45.gif" alt="Loading..." />
+        </div>
 				<input  type="hidden" id="<?php echo $variableee->id ?>" name="<?php echo $variableee->id ?>" class="form-control" />	
 				<div class="form-group">
 				<label class="col-sm-3 control-label">Name</label>
@@ -86,8 +90,8 @@ include "navbar.php";
 				</div></div>
 				<div class="form-group">
 				<div class="col-sm-offset-3 col-sm-9 m-t-15">
-                <input type="hidden" name="_METHOD" value="PUT"/>
-				<input type="submit"  name="btn_insert" class="btn btn-success" value="Insert">
+        <input type="hidden" name="_METHOD" value="PUT"/>
+				<input type="submit"  name="btn_insert" class="btn btn-success" value="Edit">
 				<a href="index.php" class="btn btn-danger">Cancel</a>
 				</div>
 				</div>
@@ -115,7 +119,7 @@ include "navbar.php";
   </a>
 
   <!-- Logout Modal-->
-<?php include "logout1.php";?>
+<?php include "logout.php";?>
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
@@ -123,11 +127,11 @@ include "navbar.php";
 
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="js/bootstrap-datepicker.min.js"></script>
+  <script src="js/bootstrap-datepicker.min.js"></script>
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
-<script src="js/main.js"></script>
-<script>
+  <script src="js/main.js"></script>
+  <script>
 /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
 var dropdown = document.getElementsByClassName("dropdown-btn");
 var i;
