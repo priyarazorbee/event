@@ -26,15 +26,16 @@ include "navbar.php";
           
         </div>
         <form method="delete" class="form-horizontal" id="deleteForm" enctype="multipart/form-data">
-					
+				
 				<div class="form-group">
                     <div class="col-sm-6">
+                    <input  type="hidden" id="id" name="id" class="form-control" />	
 				Do you want to delete??
 				</div>
             </div>
 					<div class="form-group">
 				<div class="col-sm-offset-3 col-sm-9 m-t-15">
-              		
+         		
 			<input type="submit"  name="btn_insert" class="btn btn-success" value="Delete">
 				<a href="index.php" class="btn btn-danger">Cancel</a>
 				</div>

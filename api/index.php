@@ -129,14 +129,16 @@ function email() {
 function updateImage($id) {
     $request = \Slim\Slim::getInstance()->request();
     $data = json_decode($request->getBody());
-    $id = $_REQUEST['id'];
+	$id = $_REQUEST['id'];
+	
        try {
-           $db = getDB();
-        	$name	= $_REQUEST['txt_name'];
-	    	$description	= $_REQUEST['description'];	
-			$action	= $_REQUEST['action'];	
-       		$start	= $_REQUEST['start'];
-       		$end	= $_REQUEST['end'];
+		   $db = getDB();
+		   $id = $_REQUEST['id'];
+        	$name	= $_POST['txt_name'];
+	    	$description	= $_POST['description'];	
+			$action	= $_POST['action'];	
+       		$start	= $_POST['start'];
+       		$end	= $_POST['end'];
 			$image_file	= $_FILES["txt_file"]["name"];
 			$type		= $_FILES["txt_file"]["type"];		
 			$size		= $_FILES["txt_file"]["size"];
@@ -151,12 +153,12 @@ function updateImage($id) {
             $stmt->bindParam("action", $action);
             $stmt->bindParam("start", $start);
             $stmt->bindParam("end", $end);
-            $stmt->bindParam("image", $path);
-            $stmt->bindParam("floor", $paths);
+            $stmt->bindParam("image", $image_file);
+            $stmt->bindParam("floor", $floor_file);
             $stmt->bindParam("id", $id);
             $stmt->execute();
              move_uploaded_file($_FILES['txt_file']['tmp_name'],"upload/".$_FILES['txt_file']['name']);
-            move_uploaded_file($_FILES['txt_floor']['tmp_name'],"upload/".$_FILES['txt_floor']['name']);
+            move_uploaded_file($_FILES['txt_floor']['tmp_name'],"floor_upload/".$_FILES['txt_floor']['name']);
             $db = null;
 			echo json_encode(array('status' => 'success','message'=> 'Updated Successfully.'));
 
@@ -181,23 +183,20 @@ function image() {
 		$temp		= $_FILES["txt_file"]["tmp_name"];
 		$floor_file	= $_FILES["txt_floor"]["name"];
 		$path="api/upload/".$image_file; 
-       $paths="api/floor_upload/".$floor_file;
-       
-		
-            
-			$insert_stmt=$db->prepare('INSERT INTO images(name,description,action,start, end ,image,floor) VALUES(:name,:description,:action,:start, :end,:image,:floor)'); //sql insert query					
+        $paths="api/floor_upload/".$floor_file;
+        $insert_stmt=$db->prepare('INSERT INTO images(name,description,action,start, end ,image,floor) VALUES(:name,:description,:action,:start, :end,:image,:floor)'); //sql insert query					
 			$insert_stmt->bindParam(':name',$name);	
             $insert_stmt->bindParam(':description',$description);
             $insert_stmt->bindParam(':action',$action);
             $insert_stmt->bindParam(':start',$start);
             $insert_stmt->bindParam(':end',$end);
-			$insert_stmt->bindParam(':image',$path);	 
-            $insert_stmt->bindParam(':floor',$paths);
+			$insert_stmt->bindParam(':image',$image_file);	 
+            $insert_stmt->bindParam(':floor',$floor_file);
 		    move_uploaded_file($_FILES['txt_file']['tmp_name'],"upload/".$_FILES['txt_file']['name']);
             move_uploaded_file($_FILES['txt_floor']['tmp_name'],"floor_upload/".$_FILES['txt_floor']['name']);
 			if($insert_stmt->execute())
 			{
-				echo json_encode(array('status' => 'success','message'=> 'File uploaded successfully.')); //execute query success message
+				echo json_encode(array('status' => 'success','message'=> 'File added successfully.'));
 			
 			}
 		else{

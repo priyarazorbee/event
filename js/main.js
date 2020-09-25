@@ -13,20 +13,16 @@ $("#upload").submit(function(e) {
 			setTimeout(function() {
 				$("#loading").hide();
 			}, 1000);
-			if (data.status == "success") {
-				$('#result').html(data.message);
-				$("#result").css("color", "green");
-			} else {
-				$('#result').html(data.message);
-				$("#result").css("color", "red");
-			}
-		},
-		error: function() {
+		        $("#results").html("File added successfully");
+				$("#results").css("color", "green");
+                setInterval('location.reload()', 5000);
+        },
+        error: function() {
 			setTimeout(function() {
 				$("#loading").hide();
 			}, 1000);
-			$("#result").html('Something went wrong');
-			$("#result").css("color", "red");
+			$("#results").html('Something went wrong');
+			$("#results").css("color", "red");
 		},
         cache: false,
         contentType: false,
@@ -72,21 +68,6 @@ function findById(id) {
         }
     });
 }
-$("#deleteForm").submit(function(e) {
-    debugger;
-    console.log('deleteImage');
-    $.ajax({
-        type: 'DELETE',
-        url: rootURL + 'delete' + '/' + $('#id').val(),
-        success: function(data) {
-            alert('Image deleted successfully');
-        },
-        error: function(textStatus) {
-            alert('deleteImage error');
-        }
-    });
-});
-
 function renderList(data) {
 
     var list = data == null ? [] : (data.image instanceof Array ? data.image : [data.image]);
@@ -96,7 +77,7 @@ function renderList(data) {
     $.each(list, function(index, data) {
         $('#imageList').append(' <div class="card mb-3" style="max-width: 1140px;"><div class="row no-gutters" href="#" data-identity="' + data.id + '"><div class="col-md-4">' +
             (data.image != "" ?
-                '<img  src=' + data.image + ' class="card-img" id="img-base"> ' :
+                '<img  src= api/upload/' + data.image + ' class="card-img" id="img-base"> ' :
                 '<p id="base"> Image not available' +
                 '</p>'
             ) + '</div><div class="col-md-6"><div class="card-body"><h5 class="card-title"> ' + data.name + '</h5><p class="card-text">' + data.description + '</p><p class="card-text"><small class="text-muted">' + data.start + ' to </small><small class="text-muted">' + data.end + '</small></p>' +
@@ -105,7 +86,7 @@ function renderList(data) {
                 '</p>' :
                 '<p> Active <br/> <span class="active">Stall is available</span>' +
                 '</p>'
-            ) + '</p></div></div><div id ="buttons" class="col-md-2"><button class="btn btn-primary" id="btn-edit"><a href="edit.php?id=' + data.id + '">&nbsp;&nbsp;Edit&nbsp;&nbsp;</a></button><br/><button class="btn btn-danger" data-toggle="modal" data-target="#myModal2" >Delete</button></div></div></div>');
+            ) + '</p></div></div><div id ="buttons" class="col-md-2"><button class="btn btn-primary" id="btn-edit"><a href="edit.php?id=' + data.id + '">&nbsp;&nbsp;Edit&nbsp;&nbsp;</a></button><br/><button class="btn btn-danger passDelete" onClick="findById('+data.id+');" id='+data.id+'  data-toggle="modal" data-target="#myModal2">Delete</button></div></div></div>');
 
     });
     //    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" onClick="findById('+data.id+');">&nbsp;&nbsp;Edit&nbsp;&nbsp;</button>
@@ -115,26 +96,37 @@ $('#imageList tr').on('click', function() {
     findById($(this).data('identity'));
 });
 
+$("#deleteForm").submit(function(e) {
+    debugger;
+    console.log('deleteImage');
+    $.ajax({
+		type: 'DELETE',
+		url: rootURL + 'delete'+'/' + $('#id').val(),
+		success: function(data, textStatus, jqXHR){
+			alert('data deleted successfully');
+		},
+		error: function(jqXHR, textStatus, errorThrown){
+			alert('delete data error');
+		}
+	});
+});        
+    
 $("#updateForm").submit(function(e) {
     var formData = new FormData($(this)[0]);
 	$("#loading").show();
     console.log('update');
     $.ajax({
-        url: rootURL + 'update' + '/' + $('#id').val(),
+        url: rootURL + 'update' + '/' + $(".edit").val(),
         type: "POST",
         data: formData,
         success: function(data) {
 			setTimeout(function() {
 				$("#loading").hide();
 			}, 1000);
-			if (data.status == "success") {
-				$('#result').html(data.message);
-				$("#result").css("color", "green");
-			} else {
-				$('#result').html(data.message);
-				$("#result").css("color", "red");
-			}
-		},
+		        $("#results").html("File uploaded successfully");
+				$("#results").css("color", "green");
+                setInterval('location.reload()', 5000);
+        },
 		error: function() {
 			setTimeout(function() {
 				$("#loading").hide();

@@ -18,7 +18,13 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Simha shastry</title>
+  <title>Simha shastry- <?php
+            $db = getDB();
+				$id = $_SESSION['user'];
+				$sql = $db->prepare("SELECT * FROM `users` WHERE `user_id`='$id'");
+				$sql->execute();
+				$fetch = $sql->fetch();
+			 echo $fetch['firstname']." ". $fetch['lastname']?></title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
