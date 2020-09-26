@@ -79,11 +79,11 @@ $(document).ready(function() {
                     $("#loading").hide();
                 }, 1000);
                 if (data.status == "success") {
-                    $("#email-availability").html(data.message);
-                    $("#email-availability").css("color", "green");
+                    $("#email-availability-status").html(data.message);
+                    $("#email-availability-status").css("color", "green");
                 } else {
-                    $("#email-availability").html(data.message);
-                    $("#email-availability").css("color", "red");
+                    $("#email-availability-status").html(data.message);
+                    $("#email-availability-status").css("color", "red");
                 }
             },
             error: function() {

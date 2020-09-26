@@ -4,6 +4,7 @@
    $url_components = parse_url($search); 
       parse_str($url_components['query'], $params); 
         $id= $params['id'];
+      
      $url="http://localhost/event/api/getId/".$id;
    $variableee = json_decode(file_get_contents($url));
   //  echo "<pre>";
@@ -14,6 +15,13 @@
    include "sidebar.php";
    include "navbar.php";
    ?>
+   <script>
+   $(document).ready(function(){
+  
+  var hi = $('img').attr('src', image); 
+  
+});
+</script>
 <!-- End of Sidebar -->
 <!-- End of Topbar -->
 <!-- Begin Page Content -->
@@ -58,8 +66,8 @@
          <label class="col-sm-3 control-label">Action</label>   
          <div class="col-sm-6">
             <select name="action" id="action" value="<?php echo $variableee->action ?>" required="required">
-               <option value="1">Active</option>
-               <option value="2">In-Active</option>
+               <option value="1" <?php if($variableee->action == "1") echo "Active";?>>Active</option>
+               <option value="2" <?php if($variableee->action == "2") echo "In-Active";?>>In-Active</option>
             </select>
          </div>
       </div>
@@ -68,7 +76,7 @@
          <div class="col-sm-6">
             <div class="row">
                <div class="col-sm-6">  
-                  <img class="img-thumbnail" src="http://localhost/admin/api/upload/<?php echo $variableee->image ?>"/> 
+                  <img class="img-thumbnail" id="image/api/upload/" src="api/upload/<?php echo $variableee->image ?>"/> 
                </div>
                <div class="col-sm-6"> 
                   <input type="file" id="txt_file" name="txt_file" value="<?php echo $variableee->image ?>" class="form-control" accept="image/*"/>
@@ -81,7 +89,7 @@
          <div class="col-sm-6">
             <div class="row">
                <div class="col-sm-6">  
-                  <img class="img-thumbnail" src="http://localhost/admin/api/floor_upload/<?php echo $variableee->floor ?>"/> 
+                  <img class="img-thumbnail" id="image/api/floor_upload/" src="api/floor_upload/<?php echo $variableee->floor ?>"/> 
                </div>
                <div class="col-sm-6"> 
                   <input type="file" id="txt_floor" name="txt_floor" value="<?php echo $variableee->floor ?>" class="form-control" accept="image/*"/>
