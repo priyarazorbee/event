@@ -38,8 +38,7 @@ function renderList(data) {
         $('#imageList').append(' <div class="card mb-3" style="max-width: 1140px;"><div class="row no-gutters" href="#" data-identity="' + data.id + '"><div class="col-md-4">' +
             (data.image != "" ?
                 '<img  src = api/upload/' + data.image + ' class="card-img" id="img-base"> ' :
-                '<p id="base"> Image not available' +
-                '</p>'
+                '<img  src = img/download.png class="card-img" id="img-base">'
             ) + '</div><div class="col-md-8"><div class="card-body"><h5 class="card-title"> ' + data.name + '</h5><p class="card-text">' + data.description + '</p><p class="card-text"><small class="text-muted">' + data.start + ' to </small><small class="text-muted">' + data.end + '</small></p><p class="card-text"><span class="inactive">Stall is not available</span></p></div></div></div>');
     });
 }

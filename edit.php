@@ -32,71 +32,68 @@
        <div id="loading">
          <img id="loading-image" src="img/45.gif" alt="Loading..." />
       </div>
-      <div id ="results"></div>
+      
       <input type="hidden" id="<?php echo $variableee->id ?>" name="id" value="<?php echo $variableee->id ?>" class="form-control edit" />	
       <div class="form-group">
-         <label class="col-sm-3 control-label">Name</label>
+      <div id ="results"></div>
+         <label class="col-sm-6 control-label">Name</label>
          <div class="col-sm-6">
-            <input type="text" id="txt_name" name="txt_name" class="form-control" placeholder="<?php echo $variableee->name ?>" value="<?php echo $variableee->name ?>" />
+            <input type="text" id="txt_name" name="txt_name" class="form-control" placeholder="<?php echo $variableee->name ?>" value="<?php echo $variableee->name ?>"/>
          </div>
       </div>
       <div class="form-group">
-         <label class="col-sm-3 control-label">Description</label>
-         <div class="col-sm-6">
-            <input type="text" id="description"name="description" class="form-control" placeholder="<?php echo $variableee->description ?>" value="<?php echo $variableee->description ?>"/>
+            <label class="col-lg-6 control-label">Description</label>
+            <div class="col-lg-6">
+            <textarea type="text" id="description"name="description" class="form-control" placeholder="<?php echo $variableee->description ?>" value="<?php echo $variableee->description ?>"></textarea>
          </div>
       </div>
-      <div class="form-row">
-         <div class="form-group col-md-6">
-            <label class="col-sm-3 control-label">Start Date</label>
-            <div class="datepicker date input-group">
-               <input type="text" placeholder="Start-date" value="<?php echo $variableee->start ?>" name="start" class="form-control" id="startDate">
-               <div class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></div>
-            </div>
-         </div>
-         <div class="form-group col-md-6">
-            <label class="col-sm-3 control-label">End Date</label>
-            <div class="datepicker date input-group">
-               <input type="text" placeholder="End-date" value="<?php echo $variableee->end ?>" name="end" class="form-control" id="endDate">
-               <div class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></div>
-            </div>
-         </div>
-      </div>
-      <div class="form-group">
-         <label class="col-sm-3 control-label">Action</label>   
-         <div class="col-sm-6">
-            <select name="action" id="action" value="<?php echo $variableee->action ?>" required="required">
-               <option value="1" <?php if($variableee->action == "1") echo "Active";?>>Active</option>
-               <option value="2" <?php if($variableee->action == "2") echo "In-Active";?>>In-Active</option>
+      <div class="form-group col-lg-12">
+            <label class="col-lg-6 control-label">Action</label>   
+            <div class="col-lg-6">
+            <select name="action" id="action" value="<?php echo $variableee->action ?>"  style="width:585px;border-radius:5px;height:35px;">
+               <option value="1" <?php if($variableee->action[0] == "1") echo "selected";?>>Active</option>
+               <option value="2" <?php if($variableee->action[0] == "2") echo "selected";?>>In-Active</option>
             </select>
          </div>
       </div>
-      <div class="form-group">
-         <label class="col-sm-3 control-label">File</label>
-         <div class="col-sm-6">
-            <div class="row">
-               <div class="col-sm-6">  
+      <div class="form-row">
+      <div class="form-group col-md-3" >
+            <label class="col-sm-4 control-label">Start Date</label>
+            <div class="datepicker date input-group">
+               <input type="text" placeholder="Start-date" value="<?php echo $variableee->start ?>" name="start" class="form-control" id="startDate">
+               <div class="input-group-append"><span class="input-group-text"><i class="fas fa-clock"></i></span></div>
+            </div>
+         </div>
+         <div class="form-group col-md-3">
+            <label class="col-sm-4 control-label">End Date</label>
+            <div class="datepicker date input-group">
+               <input type="text" placeholder="End-date" value="<?php echo $variableee->end ?>" name="end" class="form-control" id="endDate">
+               <div class="input-group-append"><span class="input-group-text"><i class="fas fa-clock"></i></span></div>
+            </div>
+         </div>
+      </div>
+     
+      <div class="form-group" id="file">
+         <label class="col-sm-3 control-label">Upload Stall</label>
+         <div class="col-sm-6">  
                   <img class="img-thumbnail" id="image/api/upload/" src="api/upload/<?php echo $variableee->image ?>"/> 
                </div>
                <div class="col-sm-6"> 
                   <input type="file" id="txt_file" name="txt_file" value="<?php echo $variableee->image ?>" class="form-control" accept="image/*"/>
                </div>
             </div>
-         </div>
-      </div>
-      <div class="form-group">
-         <label class="col-sm-3 control-label">Floor</label>
-         <div class="col-sm-6">
-            <div class="row">
-               <div class="col-sm-6">  
+        
+      
+         <div class="form-group" id="floor">
+         <label class="col-sm-3 control-label">Upload Stall</label>
+         <div class="col-sm-6"> 
                   <img class="img-thumbnail" id="image/api/floor_upload/" src="api/floor_upload/<?php echo $variableee->floor ?>"/> 
                </div>
                <div class="col-sm-6"> 
                   <input type="file" id="txt_floor" name="txt_floor" value="<?php echo $variableee->floor ?>" class="form-control" accept="image/*"/>
                </div>
             </div>
-         </div>
-      </div>
+       
       <div class="form-group">
          <div class="col-sm-offset-3 col-sm-9 m-t-15">
             <input type="hidden" name="_METHOD" value="PUT"/>

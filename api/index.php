@@ -76,7 +76,8 @@ function register(){
 		$lastInsertId = $db->lastInsertId();
 		if($lastInsertId)
 		{
-		echo json_encode(array('status' => 'success','message'=> 'Registered Successfully'));
+			echo json_encode(array('status' => 'success','message'=> 'Registered Successfully'));
+			
 		}
 		else 
 		{
@@ -167,6 +168,7 @@ function updateImage($id) {
         }
 }
 
+	
 function image() {
     $request = \Slim\Slim::getInstance()->request();
     $data = json_decode($request->getBody());

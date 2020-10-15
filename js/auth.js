@@ -1,40 +1,5 @@
 $(document).ready(function() {
-    $("#register").submit(function(e) {
-        var formData = new FormData($(this)[0]);
-        $("#loading").show();
-        e.preventDefault();
-        $.ajax({
-            url: rootURL + 'register',
-            type: "POST",
-            data: formData,
-            dataType: 'json',
-            success: function(data) {
-                setTimeout(function() {
-                    $("#loading").hide();
-                }, 1000);
-                if (data.status == "success") {
-                    $('#result').html(data.message);
-                    $("#result").css("color", "green");
-                    window.location.href = "home.php";
-                } else {
-                    $('#result').html(data.message);
-                    $("#result").css("color", "red");
-                    window.location.href = "register.php";
-                }
-            },
-            error: function() {
-                setTimeout(function() {
-                    $("#loading").hide();
-                }, 1000);
-                $("#result").html('Already registered');
-                $("#result").css("color", "red");
-            },
-            cache: false,
-            contentType: false,
-            processData: false
-        });
-
-    });
+    
 
     $("#username").change(function() {
         $("#loading").show();
@@ -112,6 +77,7 @@ $(document).ready(function() {
         }
     });
     $("#login").submit(function(e) {
+
         var formData = new FormData($(this)[0]);
         $("#loading").show();
         e.preventDefault();
@@ -146,6 +112,5 @@ $(document).ready(function() {
             contentType: false,
             processData: false
         });
-
     });
 });

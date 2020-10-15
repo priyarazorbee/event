@@ -1,35 +1,63 @@
 findAll();
 
 
-$("#upload").submit(function(e) {
-	var formData = new FormData($(this)[0]);
-	$("#loading").show();
-    e.preventDefault();
-    $.ajax({
-        url: rootURL + 'image',
-        type: "POST",
-        data: formData,
-        success: function(data) {
-			setTimeout(function() {
-				$("#loading").hide();
-			}, 1000);
-		        $("#results").html("File added successfully");
-				$("#results").css("color", "green");
-                setInterval('location.reload()', 5000);
-        },
-        error: function() {
-			setTimeout(function() {
-				$("#loading").hide();
-			}, 1000);
-			$("#results").html('Something went wrong');
-			$("#results").css("color", "red");
-		},
-        cache: false,
-        contentType: false,
-        processData: false
-    });
-
-});
+// $("#upload").submit(function(e) {
+	// var formData = new FormData($(this)[0]);
+	// $("#loading").show();
+    // e.preventDefault();
+//     if( document.myForm.txt_name.value == "" ) {
+//         document.getElementById('name-status').innerHTML="Please provide your name!" ;
+//         document.myForm.txt_name.focus() ;
+//         return false;
+//      }
+//     else if( document.myForm.description.value == "" ) {
+//         document.getElementById('description-status').innerHTML="Please provide your description!";
+//         document.myForm.description.focus() ;
+//         return false;
+//      }
+     
+//      else if( document.myForm.action.selectedIndex=="" ) {
+//         document.getElementById('action-status').innerHTML="Please provide your value!" ;
+//         return false;
+//      }
+//     //  return( true );
+//     else if( document.myForm.txt_file.value == "" ) {
+//         document.getElementById('upload-status').innerHTML="Please upload the image!";
+//         return false;
+//      }
+//     else{ 
+       
+//         var formData = new FormData($(this)[0]);
+// 	 $("#loading").show();
+//      e.preventDefault();
+//         $.ajax({
+//         url: rootURL + 'image',
+//         type: "POST",
+//         data: formData,
+//         success: function(data) {
+//             debugger;
+// 			setTimeout(function() {
+// 				$("#loading").hide();
+// 			}, 1000);
+// 		        $("#results").html("File added successfully");
+// 				$("#results").css("color", "green");
+//                 setInterval('location.reload()', 5000);
+//         },
+//         error: function() {
+//             debugger;
+// 			setTimeout(function() {
+// 				$("#loading").hide();
+// 			}, 1000);
+// 			$("#results").html('Something went wrong');
+// 			$("#results").css("color", "red");
+// 		},
+//         cache: false,
+//         contentType: false,
+//         processData: false
+//     });
+//     return true;
+// }  
+// });
 
 function findAction() {
     console.log('findAll');
@@ -78,8 +106,7 @@ function renderList(data) {
         $('#imageList').append(' <div class="card mb-3" style="max-width: 1140px;"><div class="row no-gutters" href="#" data-identity="' + data.id + '"><div class="col-md-4">' +
             (data.image != "" ?
                 '<img  src= api/upload/' + data.image + ' class="card-img" id="img-base"> ' :
-                '<p id="base"> Image not available' +
-                '</p>'
+                '<img  src = img/download.png class="card-img" id="img-base">'
             ) + '</div><div class="col-md-6"><div class="card-body"><h5 class="card-title"> ' + data.name + '</h5><p class="card-text">' + data.description + '</p><p class="card-text"><small class="text-muted">' + data.start + ' to </small><small class="text-muted">' + data.end + '</small></p>' +
             (data.action > 1 ?
                 '<p >In-active <br/> <span class="inactive">Stall is not available</span>' +
