@@ -175,7 +175,7 @@ function image() {
     try {
         $db = getDB();
         $name	= $_REQUEST['txt_name'];
-	    $description	= $_REQUEST['description'];	
+	    $description	= $_REQUEST['editor'];	
         $action	= $_REQUEST['action'];	
         $start	= $_REQUEST['start'];
         $end	= $_REQUEST['end'];

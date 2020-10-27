@@ -50,7 +50,7 @@
       <div class="form-group col-lg-12">
             <label class="col-lg-6 control-label">Action</label>   
             <div class="col-lg-6">
-            <select name="action" id="action" value="<?php echo $variableee->action ?>"  style="width:585px;border-radius:5px;height:35px;">
+            <select name="action" id="action" value="<?php echo $variableee->action ?>"  style="width:500px;border-radius:5px;height:35px;">
                <option value="1" <?php if($variableee->action[0] == "1") echo "selected";?>>Active</option>
                <option value="2" <?php if($variableee->action[0] == "2") echo "selected";?>>In-Active</option>
             </select>

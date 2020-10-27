@@ -19,17 +19,7 @@
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <script src="js/jquery-1.10.2.js"></script> 
-  <script src="js/config.js"></script>
-   <script>
-    var url = "js/config.js";
-    
-    $.getScript(url, function(){
-        $(document).ready(function(){
-            console.log(rootURL); // Prints: Hi there!
-            
-        });
-    });
-    </script>
+  
 </head>
 
 <body class="bg-gradient-primary">
@@ -96,6 +86,8 @@
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
+  <script src="js/config.js"></script>
+  
   <script>
 (function() {
       'use strict';
@@ -112,6 +104,7 @@
                debugger;   
             }else {
               var formData = new FormData($(this)[0]);
+              event.preventDefault();
               $("#loading").show();
               $.ajax({
             url: rootURL + 'login',

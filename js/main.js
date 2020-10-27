@@ -1,64 +1,5 @@
 findAll();
 
-
-// $("#upload").submit(function(e) {
-	// var formData = new FormData($(this)[0]);
-	// $("#loading").show();
-    // e.preventDefault();
-//     if( document.myForm.txt_name.value == "" ) {
-//         document.getElementById('name-status').innerHTML="Please provide your name!" ;
-//         document.myForm.txt_name.focus() ;
-//         return false;
-//      }
-//     else if( document.myForm.description.value == "" ) {
-//         document.getElementById('description-status').innerHTML="Please provide your description!";
-//         document.myForm.description.focus() ;
-//         return false;
-//      }
-     
-//      else if( document.myForm.action.selectedIndex=="" ) {
-//         document.getElementById('action-status').innerHTML="Please provide your value!" ;
-//         return false;
-//      }
-//     //  return( true );
-//     else if( document.myForm.txt_file.value == "" ) {
-//         document.getElementById('upload-status').innerHTML="Please upload the image!";
-//         return false;
-//      }
-//     else{ 
-       
-//         var formData = new FormData($(this)[0]);
-// 	 $("#loading").show();
-//      e.preventDefault();
-//         $.ajax({
-//         url: rootURL + 'image',
-//         type: "POST",
-//         data: formData,
-//         success: function(data) {
-//             debugger;
-// 			setTimeout(function() {
-// 				$("#loading").hide();
-// 			}, 1000);
-// 		        $("#results").html("File added successfully");
-// 				$("#results").css("color", "green");
-//                 setInterval('location.reload()', 5000);
-//         },
-//         error: function() {
-//             debugger;
-// 			setTimeout(function() {
-// 				$("#loading").hide();
-// 			}, 1000);
-// 			$("#results").html('Something went wrong');
-// 			$("#results").css("color", "red");
-// 		},
-//         cache: false,
-//         contentType: false,
-//         processData: false
-//     });
-//     return true;
-// }  
-// });
-
 function findAction() {
     console.log('findAll');
     $.ajax({
@@ -113,7 +54,7 @@ function renderList(data) {
                 '</p>' :
                 '<p> Active <br/> <span class="active">Stall is available</span>' +
                 '</p>'
-            ) + '</p></div></div><div id ="buttons" class="col-md-2"><button class="btn btn-primary" id="btn-edit"><a href="edit.php?id=' + data.id + '">&nbsp;&nbsp;Edit&nbsp;&nbsp;</a></button><br/><button class="btn btn-danger passDelete" onClick="findById('+data.id+');" id='+data.id+'  data-toggle="modal" data-target="#myModal2">Delete</button></div></div></div>');
+            ) + '</p></div></div><div id ="buttons" class="col-md-2"><button class="btn btn-tertiary" id="btn-edit"><a href="edit.php?id=' + data.id + '">&nbsp;&nbsp;Edit&nbsp;&nbsp;</a></button><br/><button class="btn btn-primary" id="btn-view"><a href="view.php?id=' + data.id + '">&nbsp;View&nbsp;</a></button><br/><br/><button class="btn btn-danger passDelete" onClick="findById('+data.id+');" id='+data.id+'  data-toggle="modal" data-target="#myModal2">Delete</button></div></div></div>');
 
     });
     //    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" onClick="findById('+data.id+');">&nbsp;&nbsp;Edit&nbsp;&nbsp;</button>
