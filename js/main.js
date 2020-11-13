@@ -29,7 +29,6 @@ function findById(id) {
         url: rootURL + 'getId' + '/' + id,
         dataType: "json",
         success: function(data) {
-
             console.log('findById success: ' + data.name);
             currentImage = data;
             renderDetails(currentImage);
@@ -79,36 +78,7 @@ $("#deleteForm").submit(function(e) {
 	});
 });        
     
-$("#updateForm").submit(function(e) {
-    var formData = new FormData($(this)[0]);
-	$("#loading").show();
-    console.log('update');
-    $.ajax({
-        url: rootURL + 'update' + '/' + $(".edit").val(),
-        type: "POST",
-        data: formData,
-        success: function(data) {
-			setTimeout(function() {
-				$("#loading").hide();
-			}, 1000);
-		        $("#results").html("File uploaded successfully");
-				$("#results").css("color", "green");
-                setInterval('location.reload()', 5000);
-        },
-		error: function() {
-			setTimeout(function() {
-				$("#loading").hide();
-			}, 1000);
-			$("#result").html('Something went wrong');
-			$("#result").css("color", "red");
-		},
-        cache: false,
-        contentType: false,
-        processData: false
-    });
 
-    e.preventDefault();
-});
 
 function renderDetails(image) {
     $('#id').val(image.id);
@@ -119,27 +89,4 @@ function renderDetails(image) {
     $('#end').val(image.end);
     $('#txt_file').attr('src', 'api/upload/' + image.txt_file);
 
-}
-
-
-function formToJSON() {
-    return JSON.stringify({
-
-        "username": $('#username').val(),
-        "email": $('#email').val(),
-        "password": $('#password').val(),
-        "confirm_password": $('#confirm_password').val(),
-
-    });
-}
-
-function formToJS() {
-    return JSON.stringify({
-
-        "username": $('#username').val(),
-        "email": $('#email').val(),
-        "password": $('#password').val(),
-        "confirm_password": $('#confirm_password').val(),
-        "phone": $('#phone').val(),
-    });
 }

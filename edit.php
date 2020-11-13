@@ -15,98 +15,118 @@
    include "sidebar.php";
    include "navbar.php";
    ?>
-   <script>
-   $(document).ready(function(){
-  
-  var hi = $('img').attr('src', image); 
-  
-});
-</script>
+ 
 <!-- End of Sidebar -->
 <!-- End of Topbar -->
 <!-- Begin Page Content -->
-<div class="container-fluid">
-   <h1 class="h3 mb-4 text-gray-800">Edit Stall</h1>
-   <!-- Page Heading -->
-   <form method="post" class="form-horizontal" id="updateForm" enctype="multipart/form-data">
-       <div id="loading">
-         <img id="loading-image" src="img/45.gif" alt="Loading..." />
-      </div>
+<div class="container">
+ 
+
+  <!-- The Modal -->
+ 
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
       
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Events</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+        <form method="post" class="form-horizontal" id="updateForm" enctype="multipart/form-data">
+         <div id="results"></div>
+                <div id="loading">
+             <img id="loading-image" src="img/45.gif" alt="Loading..." />
+         </div> 
       <input type="hidden" id="<?php echo $variableee->id ?>" name="id" value="<?php echo $variableee->id ?>" class="form-control edit" />	
-      <div class="form-group">
-      <div id ="results"></div>
-         <label class="col-sm-6 control-label">Name</label>
-         <div class="col-sm-6">
-            <input type="text" id="txt_name" name="txt_name" class="form-control" placeholder="<?php echo $variableee->name ?>" value="<?php echo $variableee->name ?>"/>
-         </div>
-      </div>
-      <div class="form-group">
-            <label class="col-lg-6 control-label">Description</label>
-            <div class="col-lg-6">
-            <textarea type="text" id="description"name="description" class="form-control" placeholder="<?php echo $variableee->description ?>" value="<?php echo $variableee->description ?>"></textarea>
-         </div>
-      </div>
-      <div class="form-group col-lg-12">
-            <label class="col-lg-6 control-label">Action</label>   
-            <div class="col-lg-6">
+    <div class="form-group">
+      <label for="name">Event Title</label><span class="require">*</span>
+      <input type="text" id="txt_name" name="txt_name" class="form-control" placeholder="<?php echo $variableee->name ?>" value="<?php echo $variableee->name ?>"/>
+      
+    </div>
+    <div class="form-group">
+      <label for="pwd">Event Description</label>
+      <textarea type="text" class="form-control" id="description"  name="editor" ><?php echo $variableee->description ?></textarea>
+       <script>
+        CKEDITOR.replace( 'editor', {
+    toolbarGroups: [ { name: 'basicstyles' } ],
+    on: {
+        instanceReady: function() {
+            // Autosave but no more frequent than 5 sec.
+            var buffer = CKEDITOR.tools.eventsBuffer( 2000, function() {
+                console.log( 'Autosave!' );
+            } );         
+            
+            this.on( 'change', buffer.input );
+        }
+    }
+} );
+       </script> 
+    </div>
+    <div class="form-group">
+            <label for="action">Action</label> <br/>
             <select name="action" id="action" value="<?php echo $variableee->action ?>"  style="width:500px;border-radius:5px;height:35px;">
                <option value="1" <?php if($variableee->action[0] == "1") echo "selected";?>>Active</option>
                <option value="2" <?php if($variableee->action[0] == "2") echo "selected";?>>In-Active</option>
             </select>
-         </div>
+             
       </div>
       <div class="form-row">
-      <div class="form-group col-md-3" >
-            <label class="col-sm-4 control-label">Start Date</label>
+      <div class="form-group col-md-6" >
+            <label for="startDate">Start Date</label><span class="require">*</span>
             <div class="datepicker date input-group">
-               <input type="text" placeholder="Start-date" value="<?php echo $variableee->start ?>" name="start" class="form-control" id="startDate">
+            <input type="text" placeholder="Start-date" value="<?php echo $variableee->start ?>" name="start" class="form-control" id="startDate">
                <div class="input-group-append"><span class="input-group-text"><i class="fas fa-clock"></i></span></div>
-            </div>
-         </div>
-         <div class="form-group col-md-3">
-            <label class="col-sm-4 control-label">End Date</label>
-            <div class="datepicker date input-group">
-               <input type="text" placeholder="End-date" value="<?php echo $variableee->end ?>" name="end" class="form-control" id="endDate">
-               <div class="input-group-append"><span class="input-group-text"><i class="fas fa-clock"></i></span></div>
-            </div>
-         </div>
+               
       </div>
-     
+         </div>
+         <div class="form-group col-md-6">
+            <label for="endDate">End Date</label><span class="require">*</span>
+            <div class="datepicker date input-group">
+            <input type="text" placeholder="End-date" value="<?php echo $variableee->end ?>" name="end" class="form-control" id="endDate">
+               <div class="input-group-append"><span class="input-group-text"><i class="fas fa-clock"></i></span></div>
+              
+            </div>
+            </div>  
+      </div>
+      
       <div class="form-group" id="file">
-         <label class="col-sm-3 control-label">Upload Stall</label>
+         <label for="file">Upload Event</label><span class="require">*</span>
          <div class="col-sm-6">  
                   <img class="img-thumbnail" id="image/api/upload/" src="api/upload/<?php echo $variableee->image ?>"/> 
                </div>
                <div class="col-sm-6"> 
                   <input type="file" id="txt_file" name="txt_file" value="<?php echo $variableee->image ?>" class="form-control" accept="image/*"/>
                </div>
-            </div>
-        
-      
-         <div class="form-group" id="floor">
-         <label class="col-sm-3 control-label">Upload Stall</label>
+     </div>
+      <div class="form-group">
+         <label for="floor">Upload Floor</label><span class="require">*</span>
          <div class="col-sm-6"> 
                   <img class="img-thumbnail" id="image/api/floor_upload/" src="api/floor_upload/<?php echo $variableee->floor ?>"/> 
                </div>
                <div class="col-sm-6"> 
                   <input type="file" id="txt_floor" name="txt_floor" value="<?php echo $variableee->floor ?>" class="form-control" accept="image/*"/>
                </div>
-            </div>
-       
-      <div class="form-group">
-         <div class="col-sm-offset-3 col-sm-9 m-t-15">
-            <input type="hidden" name="_METHOD" value="PUT"/>
-            <input type="submit"  name="btn_insert" class="btn btn-success" value="Edit">
-            <a href="index.php" class="btn btn-danger">Cancel</a>
          </div>
-      </div>
-   </form>
+         <!-- <a style="margin-left:450px!important;" href="index.php" class="btn btn-danger">Cancel</a> -->
+         </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <input type="hidden" name="_METHOD" value="PUT"/>
+            <input type="submit"  name="btn_insert" class="btn btn-success" value="Edit">
+        </div>
+  </form>
+        
+        
+      
+    </div>
+  </div>
+  
 </div>
-<!-- /.container-fluid -->
-</div>
-<!-- End of Main Content -->
-<!-- Footer -->
 <?php include "footer.php"; ?>
 <!-- End of Footer -->
 </div>
@@ -130,20 +150,7 @@
 <script src="js/main.js"></script>
 <script>
    /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-   var dropdown = document.getElementsByClassName("dropdown-btn");
-   var i;
    
-   for (i = 0; i < dropdown.length; i++) {
-     dropdown[i].addEventListener("click", function() {
-     this.classList.toggle("active");
-     var dropdownContent = this.nextElementSibling;
-     if (dropdownContent.style.display === "block") {
-     dropdownContent.style.display = "none";
-     } else {
-     dropdownContent.style.display = "block";
-     }
-     });
-   }
       $(function () {
    
        // INITIALIZE DATEPICKER PLUGIN
@@ -152,14 +159,47 @@
            format: "yyyy/mm/dd"
        });
    
-   
-       // FOR DEMO PURPOSE
-       $('#reservationDate').on('change', function () {
-           var pickedDate = $('input').val();
-           $('#pickedDate').html(pickedDate);
-       });
    });
-     
+  
+   $("#updateForm").submit(function(e) {
+      e.preventDefault(); 
+      var formData = new FormData($(this)[0]);
+      $("#loading").show();
+      $.ajax({
+        url: rootURL + 'update' + '/' + $(".edit").val(),
+        type: "POST",
+        data: formData,
+        success: function(data) {
+         $("#loading").hide();
+            $("#results").html("File uploaded successfully");
+				$("#results").css("color", "green");
+            setInterval('location.reload()', 50000);
+        },
+		error: function() {
+         $("#loading").hide();
+			$("#result").html('Something went wrong');
+			$("#result").css("color", "red");
+		},
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+
+  
+}); 
 </script>  
 </body>
 </html>
+<!-- CKEDITOR.replace( 'editor', {
+    toolbarGroups: [ { name: 'basicstyles' } ],
+    on: {
+        instanceReady: function() {
+            // Autosave but no more frequent than 5 sec.
+            var buffer = CKEDITOR.tools.eventsBuffer( 5000, function() {
+                console.log( 'Autosave!' );
+            } );         
+            
+            this.on( 'change', buffer.input );
+        }
+    }
+} ); -->

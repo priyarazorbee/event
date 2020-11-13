@@ -4,7 +4,6 @@
    include "navbar.php";
    ?>
 <div class="container">
- 
 
   <!-- The Modal -->
  
@@ -21,9 +20,9 @@
         <div class="modal-body">
         <form class="needs-validation" method="post" id="uploads" novalidate>
   <div id="results"></div>
-  <!-- <div id="loading">
+  <div id="loading">
          <img id="loading-image" src="img/45.gif" alt="Loading..." />
-      </div> -->
+      </div>
     <div class="form-group">
       <label for="name">Event Title</label><span class="require">*</span>
       <input type="text" class="form-control" id="txt_name" placeholder="Enter Title" name="txt_name" required>
@@ -93,11 +92,8 @@
           <button type="submit" class="btn btn-tertiary">Submit</button>
         </div>
   </form>
-        
-        
-      
-    </div>
   </div>
+</div>
   
 </div>
 <?php include "footer.php"; ?>
@@ -143,18 +139,16 @@
         contentType: false,
         processData: false,
         success: function(data) {
-            debugger;
-			setTimeout(function() {
+			  setTimeout(function() {
 				$("#loading").hide();
 			}, 1000);
 		        $("#results").html("File added successfully");
-				$("#results").css("color", "green");
-                setInterval('location.reload()', 5000);
+				    $("#results").css("color", "green");
+            setInterval('location.reload()', 5000);
         },
         error: function() {
-            debugger;
-			setTimeout(function() {
-				$("#loading").hide();
+          setTimeout(function() {
+				  $("#loading").hide();
 			}, 1000);
 			$("#results").html('Something went wrong');
 			$("#results").css("color", "red");
@@ -174,12 +168,6 @@
        format: "yyyy/mm/dd"
    });
 
-
-   // FOR DEMO PURPOSE
-   $('#reservationDate').on('change', function () {
-       var pickedDate = $('input').val();
-       $('#pickedDate').html(pickedDate);
-   });
 });
 </script>
 </body>

@@ -20,10 +20,10 @@
 <!-- End of Topbar -->
 <!-- Begin Page Content -->
 <div class="container-fluid">
-   <h1 class="h3 mb-4 text-gray-800"></h1>
+   <h1 class="h3 mb-4 text-gray-800" style="text-align:center">View Event</h1>
    <!-- Page Heading -->
  
-      <div class="card">
+      <div class="card card-view">
   <img src="api/upload/<?php echo $variableee->image ?>" alt="John" style="width:100%">
   <h1><?php echo $variableee->name ?></h1>
   <p class="title"><?php echo $variableee->description ?></p>

@@ -129,14 +129,13 @@ function email() {
 
 function updateImage($id) {
     $request = \Slim\Slim::getInstance()->request();
-    $data = json_decode($request->getBody());
+	$data = json_decode($request->getBody());
 	$id = $_REQUEST['id'];
-	
-       try {
+	try {
 		   $db = getDB();
-		   $id = $_REQUEST['id'];
+		    $id = $_REQUEST['id'];
         	$name	= $_POST['txt_name'];
-	    	$description	= $_POST['description'];	
+	    	$description	= $_POST['editor'];
 			$action	= $_POST['action'];	
        		$start	= $_POST['start'];
        		$end	= $_POST['end'];
@@ -146,25 +145,74 @@ function updateImage($id) {
 			$temp		= $_FILES["txt_file"]["tmp_name"];
 			$floor_file	= $_FILES["txt_floor"]["name"];
 			$path="api/upload/".$image_file; 
-        	$paths="api/floor_upload/".$floor_file;
-            $sql = "UPDATE images SET name=:name,description=:description,start=:start,end=:end,action=:action,image=:image,floor=:floor WHERE id=:id";
-            $stmt = $db->prepare($sql);
-            $stmt->bindParam("name", $name);
+			$paths="api/floor_upload/".$floor_file;
+			if($image_file!="" && $floor_file!=""){
+				move_uploaded_file($_FILES['txt_file']['tmp_name'],"upload/".$_FILES['txt_file']['name']);
+				move_uploaded_file($_FILES['txt_floor']['tmp_name'],"floor_upload/".$_FILES['txt_floor']['name']);
+			$sql = "UPDATE images SET name=:name,description=:description,start=:start,end=:end,action=:action,image=:image,floor=:floor WHERE id=:id";
+			$stmt = $db->prepare($sql);
+			$stmt->bindParam("name", $name);
+            $stmt->bindParam("description", $description);
+            $stmt->bindParam("action", $action);
+            $stmt->bindParam("start", $start);
+			$stmt->bindParam("end", $end);
+			$stmt->bindParam("image", $image_file);
+            $stmt->bindParam("floor", $floor_file);
+            $stmt->bindParam("id", $id);
+            $stmt->execute();
+			
+			}
+			elseif($image_file !="" && $floor_file == ""){
+				move_uploaded_file($_FILES['txt_file']['tmp_name'],"upload/".$_FILES['txt_file']['name']);
+				$sql = "UPDATE images SET name=:name,description=:description,start=:start,end=:end,action=:action,image=:image,floor=:floor WHERE id=:id";
+				$stmt = $db->prepare($sql);
+				$stmt->bindParam("name", $name);
+            $stmt->bindParam("description", $description);
+            $stmt->bindParam("action", $action);
+            $stmt->bindParam("start", $start);
+            $stmt->bindParam("end", $end);
+			$stmt->bindParam("image", $image_file);
+			$stmt->bindParam("floor", $floor_file);
+            $stmt->bindParam("id", $id);
+            $stmt->execute();
+			
+            
+			}
+			
+			elseif($floor_file != "" && $image_file !=""){
+				move_uploaded_file($_FILES['txt_floor']['tmp_name'],"floor_upload/".$_FILES['txt_floor']['name']);
+				$sql = "UPDATE images SET name=:name,description=:description,start=:start,end=:end,action=:action,image=:image,floor=:floor WHERE id=:id";
+				$stmt = $db->prepare($sql);
+				$stmt->bindParam("name", $name);
+            $stmt->bindParam("description", $description);
+            $stmt->bindParam("action", $action);
+            $stmt->bindParam("start", $start);
+			$stmt->bindParam("end", $end);
+			$stmt->bindParam("image", $image_file);
+           $stmt->bindParam("floor", $floor_file);
+			$stmt->bindParam("id", $id);
+            $stmt->execute();
+			}
+			else{
+
+				$sql = "UPDATE images SET name=:name,description=:description,start=:start,end=:end,action=:action,image=:image,floor=:floor WHERE id=:id";
+				$stmt = $db->prepare($sql);
+				$stmt->bindParam("name", $name);
             $stmt->bindParam("description", $description);
             $stmt->bindParam("action", $action);
             $stmt->bindParam("start", $start);
             $stmt->bindParam("end", $end);
             $stmt->bindParam("image", $image_file);
-            $stmt->bindParam("floor", $floor_file);
-            $stmt->bindParam("id", $id);
+			$stmt->bindParam("floor", $floor_file);
+			$stmt->bindParam("id", $id);
             $stmt->execute();
-             move_uploaded_file($_FILES['txt_file']['tmp_name'],"upload/".$_FILES['txt_file']['name']);
-            move_uploaded_file($_FILES['txt_floor']['tmp_name'],"floor_upload/".$_FILES['txt_floor']['name']);
+			}
             $db = null;
 			echo json_encode(array('status' => 'success','message'=> 'Updated Successfully.'));
-
+			
         }catch (Exception $e) {
-			echo json_encode(array('status' => 'error','message'=> 'Please try again .'));
+			// echo json_encode(array('status' => 'error','message'=> 'Please try again .'));
+			echo '{"error":{"text":'. $e->getMessage() .'}}'; 
         }
 }
 

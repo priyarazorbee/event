@@ -20,7 +20,6 @@ function findById(id) {
         url: rootURL + 'getId' + '/' + id,
         dataType: "json",
         success: function(data) {
-
             console.log('findById success: ' + data.name);
             currentImage = data;
             renderDetails(currentImage);
@@ -74,24 +73,3 @@ function renderDetails(image) {
 }
 
 
-function formToJSON() {
-    return JSON.stringify({
-
-        "username": $('#username').val(),
-        "email": $('#email').val(),
-        "password": $('#password').val(),
-        "confirm_password": $('#confirm_password').val(),
-
-    });
-}
-
-function formToJS() {
-    return JSON.stringify({
-
-        "username": $('#username').val(),
-        "email": $('#email').val(),
-        "password": $('#password').val(),
-        "confirm_password": $('#confirm_password').val(),
-        "phone": $('#phone').val(),
-    });
-}

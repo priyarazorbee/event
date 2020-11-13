@@ -1,89 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Bootstrap 4 Form Validation</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link href="css/styles.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<style>
-    .bs-example{
-        margin: 20px;        
-    }
-</style>
-</head>
-
-
-<div class="container">
-
-  <form class="needs-validation" method="post" id="uploads" novalidate>
-  <div id="results"></div>
-  <div id="loading">
+<?php
+   ini_set("max_execution_time", 0);
+   $search = $_SERVER['REQUEST_URI'] ;
+   $url_components = parse_url($search); 
+      parse_str($url_components['query'], $params); 
+        $id= $params['id'];
+      
+     $url="http://localhost/event/api/getId/".$id;
+   $variableee = json_decode(file_get_contents($url));
+  //  echo "<pre>";
+  //  print_r($variableee->id);
+  //  echo "</pre>";
+   
+   include "head.php"; 
+   include "sidebar.php";
+   include "navbar.php";
+   ?>
+   <script>
+   $(document).ready(function(){
+  
+  var hi = $('img').attr('src', image); 
+  
+});
+</script>
+<!-- End of Sidebar -->
+<!-- End of Topbar -->
+<!-- Begin Page Content -->
+<div class="container-fluid">
+   <h1 class="h3 mb-4 text-gray-800">Edit Stall</h1>
+   <!-- Page Heading -->
+   <form method="post" class="form-horizontal" id="updateForm" enctype="multipart/form-data">
+       <div id="loading">
          <img id="loading-image" src="img/45.gif" alt="Loading..." />
       </div>
-    <div class="form-group">
-      <label for="name">Name:</label>
-      <input type="text" class="form-control" id="txt_name" placeholder="Enter username" name="txt_name" required>
-      <div class="valid-feedback">Valid.</div>
-      <div class="invalid-feedback">Please fill out this field.</div>
-    </div>
-    <div class="form-group">
-      <label for="pwd">Description:</label>
-      <input type="text" class="form-control" id="description" placeholder="Enter Description" name="description" required>
-      <div class="valid-feedback">Valid.</div>
-      <div class="invalid-feedback">Please fill out this field.</div>
-    </div>
-    <div class="form-group">
-            <label for="action">Action</label>   
-                <select name="action" id="action" >
-                <option>Choose a value</option>
-                  <option value="1">Active</option>
-                  <option value="2">In-Active</option>
-               </select>
-               <!-- <div class="valid-feedback">Valid.</div>
-      <div class="invalid-feedback">Please fill out this field.</div> -->
-      </div>
-      <div class="form-group">
-            <label for="startDate">Start Date</label>
-            <div class="datepicker date input-group">
-               <input type="text" placeholder="Start-date" name="start" class="form-control" id="startDate" required>
-               <div class="input-group-append"><span class="input-group-text"><i class="fas fa-clock"></i></span></div>
-               <div class="valid-feedback">Valid.</div>
-      <div class="invalid-feedback">Please fill out this field.</div>
-            </div>
-         </div>
-         <div class="form-group">
-            <label for="endDate">End Date</label>
-            <div class="datepicker date input-group">
-               <input type="text" placeholder="End-date" name="end" class="form-control" id="endDate"required >
-               <div class="input-group-append"><span class="input-group-text"><i class="fas fa-clock"></i></span></div>
-               <div class="valid-feedback">Valid.</div>
-      <div class="invalid-feedback">Please fill out this field.</div> 
-            </div>
-         
-      </div>
       
-      <div class="form-group" id="file">
-         <label for="file">Upload Stall</label>
-            <input type="file" id="txt_file" name="txt_file" class="form-control" accept="image/*" required />
-            <div class="valid-feedback">Valid.</div>
-      <div class="invalid-feedback">Please fill out this field.</div>
-         
+      <input type="hidden" id="<?php echo $variableee->id ?>" name="id" value="<?php echo $variableee->id ?>" class="form-control edit" />	
+      <div class="form-group">
+      <div id ="results"></div>
+         <label class="col-sm-6 control-label">Name</label>
+         <div class="col-sm-6">
+            <input type="text" id="txt_name" name="txt_name" class="form-control" placeholder="<?php echo $variableee->name ?>" value="<?php echo $variableee->name ?>"/>
+         </div>
       </div>
       <div class="form-group">
-         <label for="floor">Upload Floor</label>
-         
-            <input type="file" id="txt_floor" name="txt_floor" class="form-control" accept="image/*" required/>
-            <div class="valid-feedback">Valid.</div>
-      <div class="invalid-feedback">Please fill out this field.</div>
+            <label class="col-lg-6 control-label">Description</label>
+            <div class="col-lg-6">
+            <textarea type="text" id="description"name="description" class="form-control" placeholder="<?php echo $variableee->description ?>"></textarea>
          </div>
-         <a href="index.php" class="btn btn-danger">Cancel</a>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+      </div>
+      <div class="form-group col-lg-12">
+            <label class="col-lg-6 control-label">Action</label>   
+            <div class="col-lg-6">
+            <select name="action" id="action" value="<?php echo $variableee->action ?>"  style="width:500px;border-radius:5px;height:35px;">
+               <option value="1" <?php if($variableee->action[0] == "1") echo "selected";?>>Active</option>
+               <option value="2" <?php if($variableee->action[0] == "2") echo "selected";?>>In-Active</option>
+            </select>
+         </div>
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-3" >
+            <label class="col-sm-4 control-label">Start Date</label>
+            <div class="datepicker date input-group">
+               <input type="text" placeholder="Start-date" value="<?php echo $variableee->start ?>" name="start" class="form-control" id="startDate">
+               <div class="input-group-append"><span class="input-group-text"><i class="fas fa-clock"></i></span></div>
+            </div>
+         </div>
+         <div class="form-group col-md-3">
+            <label class="col-sm-4 control-label">End Date</label>
+            <div class="datepicker date input-group">
+               <input type="text" placeholder="End-date" value="<?php echo $variableee->end ?>" name="end" class="form-control" id="endDate">
+               <div class="input-group-append"><span class="input-group-text"><i class="fas fa-clock"></i></span></div>
+            </div>
+         </div>
+      </div>
+     
+      <div class="form-group" id="file">
+         <label class="col-sm-3 control-label">Upload Stall</label>
+         <div class="col-sm-6">  
+                  <img class="img-thumbnail" id="image/api/upload/" src="api/upload/<?php echo $variableee->image ?>"/> 
+               </div>
+               <div class="col-sm-6"> 
+                  <input type="file" id="txt_file" name="txt_file" value="<?php echo $variableee->image ?>" class="form-control" accept="image/*"/>
+               </div>
+            </div>
+        
+      
+         <div class="form-group" id="floor">
+         <label class="col-sm-3 control-label">Upload Stall</label>
+         <div class="col-sm-6"> 
+                  <img class="img-thumbnail" id="image/api/floor_upload/" src="api/floor_upload/<?php echo $variableee->floor ?>"/> 
+               </div>
+               <div class="col-sm-6"> 
+                  <input type="file" id="txt_floor" name="txt_floor" value="<?php echo $variableee->floor ?>" class="form-control" accept="image/*"/>
+               </div>
+            </div>
+       
+      <div class="form-group">
+         <div class="col-sm-offset-3 col-sm-9 m-t-15">
+            <input type="hidden" name="_METHOD" value="PUT"/>
+            <input type="submit"  name="btn_insert" class="btn btn-success" value="Edit">
+            <a href="index.php" class="btn btn-danger">Cancel</a>
+         </div>
+      </div>
+   </form>
 </div>
+<!-- /.container-fluid -->
+</div>
+<!-- End of Main Content -->
+<!-- Footer -->
 <?php include "footer.php"; ?>
 <!-- End of Footer -->
 </div>
@@ -104,71 +127,39 @@
 <script src="js/bootstrap-datepicker.min.js"></script>
 <!-- Custom scripts for all pages-->
 <script src="js/sb-admin-2.min.js"></script>
-<!-- <script src="js/config.js"></script> -->
+<script src="js/main.js"></script>
 <script>
-(function() {
-      'use strict';
-      window.addEventListener('load', function() {
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.getElementsByClassName('needs-validation');
-        // Loop over them and prevent submission
-        var validation = Array.prototype.filter.call(forms, function(form) {
-          form.addEventListener('submit', function(event) {
-            debugger;
-            if (form.checkValidity() === false) {
-              event.preventDefault();
-              event.stopPropagation();
-               debugger;   
-            }else {
-              var formData = new FormData($(this)[0]);
-              $("#loading").show();
-        $.ajax({
-        url: rootURL + 'image',
-        type: "POST",
-        data: formData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function(data) {
-            debugger;
-			setTimeout(function() {
-				$("#loading").hide();
-			}, 1000);
-		        $("#results").html("File added successfully");
-				$("#results").css("color", "green");
-                setInterval('location.reload()', 50000);
-        },
-        error: function() {
-            debugger;
-			setTimeout(function() {
-				$("#loading").hide();
-			}, 1000);
-			$("#results").html('Something went wrong');
-			$("#results").css("color", "red");
-		},
-        });
-            }
-            form.classList.add('was-validated');
-          }, false);
-        });
-      }, false);
-    })();
-    $(function () {
+   /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+   var dropdown = document.getElementsByClassName("dropdown-btn");
+   var i;
    
-   // INITIALIZE DATEPICKER PLUGIN
-   $('.datepicker').datepicker({
-       clearBtn: true,
-       format: "yyyy/mm/dd"
+   for (i = 0; i < dropdown.length; i++) {
+     dropdown[i].addEventListener("click", function() {
+     this.classList.toggle("active");
+     var dropdownContent = this.nextElementSibling;
+     if (dropdownContent.style.display === "block") {
+     dropdownContent.style.display = "none";
+     } else {
+     dropdownContent.style.display = "block";
+     }
+     });
+   }
+      $(function () {
+   
+       // INITIALIZE DATEPICKER PLUGIN
+       $('.datepicker').datepicker({
+           clearBtn: true,
+           format: "yyyy/mm/dd"
+       });
+   
+   
+       // FOR DEMO PURPOSE
+       $('#reservationDate').on('change', function () {
+           var pickedDate = $('input').val();
+           $('#pickedDate').html(pickedDate);
+       });
    });
-
-
-   // FOR DEMO PURPOSE
-   $('#reservationDate').on('change', function () {
-       var pickedDate = $('input').val();
-       $('#pickedDate').html(pickedDate);
-   });
-});
-</script>
-
+     
+</script>  
 </body>
 </html>

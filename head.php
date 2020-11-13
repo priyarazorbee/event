@@ -35,10 +35,12 @@
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
 <link href="css/index.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+<script src="js/jquery-1.10.2.js"></script>
 <script src="ckeditor/ckeditor.js"></script>
-</head>
-    <script src="js/jquery-1.10.2.js"></script>
+<script src="ckeditor/adapters/jquery.js"></script>
  <script src="js/config.js"></script>
+
    <script>
     var url = "js/config.js";
     
@@ -60,3 +62,4 @@
     margin-bottom: 3rem;
 }    
 </style>
+</head>
