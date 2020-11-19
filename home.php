@@ -56,7 +56,7 @@ div.transbox p {
   <div class="transbox">
 			<h3 class="title1">Welcome!
 			<?php
-            $db = getDB();
+        $db = getDB();
 				$id = $_SESSION['user'];
 				$sql = $db->prepare("SELECT * FROM `users` WHERE `user_id`='$id'");
 				$sql->execute();

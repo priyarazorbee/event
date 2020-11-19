@@ -3,14 +3,6 @@ include "sidebar.php";
 include "navbar.php";
 ?>
 
-
-    <!-- End of Sidebar -->
-
-    <!-- Content Wrapper -->
-    
-        <!-- End of Topbar -->
-
-        <!-- Begin Page Content -->
         <div class="container-fluid">
 
           <!-- Page Heading -->

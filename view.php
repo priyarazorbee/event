@@ -2,36 +2,32 @@
    ini_set("max_execution_time", 0);
    $search = $_SERVER['REQUEST_URI'] ;
    $url_components = parse_url($search); 
-      parse_str($url_components['query'], $params); 
-        $id= $params['id'];
-      
-     $url="http://localhost/event/api/getId/".$id;
+   parse_str($url_components['query'], $params); 
+   $id= $params['id'];
+   $url="http://localhost/event/api/getId/".$id;
    $variableee = json_decode(file_get_contents($url));
-  //  echo "<pre>";
-  //  print_r($variableee->id);
-  //  echo "</pre>";
+   //  echo "<pre>";
+   //  print_r($variableee->id);
+   //  echo "</pre>";
    
    include "head.php"; 
    include "sidebar.php";
    include "navbar.php";
    ?>
-  
 <!-- End of Sidebar -->
 <!-- End of Topbar -->
 <!-- Begin Page Content -->
 <div class="container-fluid">
    <h1 class="h3 mb-4 text-gray-800" style="text-align:center">View Event</h1>
    <!-- Page Heading -->
- 
-      <div class="card card-view">
-  <img src="api/upload/<?php echo $variableee->image ?>" alt="John" style="width:100%">
-  <h1><?php echo $variableee->name ?></h1>
-  <p class="title"><?php echo $variableee->description ?></p>
-  <p>Starts on <?php echo $variableee->start ?> Ends on <?php echo $variableee->end ?></p>
-  
-  <p class="card-value"><button class="card-button">Contact</button></p>
-</div>
-<!-- /.container-fluid -->
+   <div class="card card-view">
+      <img src="api/upload/<?php echo $variableee->image ?>" alt="John" style="width:100%">
+      <h1><?php echo $variableee->name ?></h1>
+      <p class="title"><?php echo $variableee->description ?></p>
+      <p>Starts on <?php echo $variableee->start ?> Ends on <?php echo $variableee->end ?></p>
+      <p class="card-value"><button class="card-button">Contact</button></p>
+   </div>
+   <!-- /.container-fluid -->
 </div>
 <div class="footer-new"><?php include "footer.php"; ?></div>
 <!-- End of Footer -->
