@@ -3,14 +3,6 @@ include "sidebar.php";
 include "navbar.php";
 ?>
 
-
-    <!-- End of Sidebar -->
-
-    <!-- Content Wrapper -->
-    
-        <!-- End of Topbar -->
-
-        <!-- Begin Page Content -->
         <div class="container-fluid">
 
           <!-- Page Heading -->
@@ -124,7 +116,7 @@ include "navbar.php";
   </a>
 
   <!-- Logout Modal-->
-  <?php include "logout1.php";?>
+  <?php include "logout.php";?>
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
